@@ -1,43 +1,55 @@
-# Astro Starter Kit: Minimal
+# JapChi marketing site
+
+Static Astro site for JapChi, a cosmic dual-word puzzle game for iOS.
+
+## Schedule
+
+JapChi runs **two games per day** in US Eastern time:
+
+- **Morning Game 1:** 12:00 AM – 11:59 AM ET
+- **Evening Game 2:** 12:00 PM – 11:59 PM ET
+
+## Development
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Build
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```sh
+npm run build
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Project structure
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `src/pages/` — site pages
+- `src/layouts/` — shared layout and design system
+- `public/` — static assets, GitHub Pages files, and AASA
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Deploying to GitHub Pages
 
-## 🧞 Commands
+1. Push the repository to GitHub and enable **Pages** for the repo.
+2. Set the Pages source to **GitHub Actions**.
+3. In the repo settings, add the custom domain:
+   - `playjapchi.online`
+4. In Spaceship DNS, point the apex domain to GitHub Pages:
+   - `A` records for `@`:
+	 - `185.199.108.153`
+	 - `185.199.109.153`
+	 - `185.199.110.153`
+	 - `185.199.111.153`
+   - `AAAA` records for `@`:
+	 - `2606:50c0:8000::153`
+	 - `2606:50c0:8001::153`
+	 - `2606:50c0:8002::153`
+	 - `2606:50c0:8003::153`
+5. Wait for GitHub Pages to verify the custom domain, then the site will serve at `https://playjapchi.online`.
 
-All commands are run from the root of the project, from a terminal:
+Notes:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- The `public/CNAME` file is already set to `playjapchi.online`.
+- The GitHub Actions workflow in `.github/workflows/deploy.yml` builds on push to `main` and deploys the `dist/` artifact.
+- If you also want `www.playjapchi.online`, add a `CNAME` record for `www` pointing to the GitHub Pages host you choose and redirect it to the apex domain.
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

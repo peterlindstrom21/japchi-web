@@ -4,7 +4,7 @@ export interface Props {
   description?: string;
 }
 
-const { title, description = 'JapChi — the daily dual-word puzzle game for iOS. Bridge two words through a cosmic rift every day.' } = Astro.props;
+const { title, description = 'JapChi — the twice-daily dual-word puzzle game for iOS. Play Morning Game 1 from 12:00 AM–11:59 AM ET and Evening Game 2 from 12:00 PM–11:59 PM ET.' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
