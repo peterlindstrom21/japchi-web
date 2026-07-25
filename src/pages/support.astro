@@ -1,0 +1,242 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faqs = [
+  {
+    q: "How often does a new puzzle appear?",
+    a: "A brand-new rift appears every day at midnight UTC. Everyone worldwide plays the same daily puzzle.",
+  },
+  {
+    q: "Do I need an account to play?",
+    a: "You can play as a guest, but creating a free account (via Apple, Google, or Facebook Sign In) lets you sync your streak and stats across devices.",
+  },
+  {
+    q: "I lost my streak \u2014 can it be restored?",
+    a: "Email us at support@playjapchi.online with your account email and the date(s) affected. We will investigate and restore it if the data supports it.",
+  },
+  {
+    q: "The app crashed / isn\u2019t loading. What should I do?",
+    a: "Try force-closing the app and reopening it. If the problem persists, delete and reinstall the app (your account data is backed up in the cloud). If that doesn\u2019t help, email support@playjapchi.online with your iOS version and device model.",
+  },
+  {
+    q: "Can I play past puzzles?",
+    a: "The daily puzzle is the main challenge. Past puzzle replay is on our roadmap \u2014 stay tuned.",
+  },
+  {
+    q: "How do I delete my account and data?",
+    a: "Email privacy@playjapchi.online and we will permanently delete your account and all associated data within 30 days.",
+  },
+  {
+    q: "Is JapChi available on Android?",
+    a: "JapChi is currently iOS-only. Android is on our long-term roadmap.",
+  },
+];
+---
+<Base
+  title="Support — JapChi"
+  description="Get help with JapChi. Contact support or browse frequently asked questions."
+>
+  <article aria-labelledby="support-heading">
+    <p class="section-label">Help &amp; FAQ</p>
+    <h1 id="support-heading">Support</h1>
+    <p class="page-intro">
+      Something not right with your rift? We're here to help.
+    </p>
+
+    <!-- ========================================================
+         Contact card
+         ======================================================== -->
+    <section aria-labelledby="contact-heading" class="contact-section">
+      <h2 id="contact-heading">Contact Us</h2>
+      <div class="card contact-card">
+        <div class="contact-row">
+          <span class="contact-icon" aria-hidden="true">✉️</span>
+          <div>
+            <p class="contact-type">General &amp; Technical Support</p>
+            <a href="mailto:support@playjapchi.online" class="contact-email">
+              support@playjapchi.online
+            </a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon" aria-hidden="true">🔒</span>
+          <div>
+            <p class="contact-type">Privacy &amp; Data Requests</p>
+            <a href="mailto:privacy@playjapchi.online" class="contact-email">
+              privacy@playjapchi.online
+            </a>
+          </div>
+        </div>
+        <p class="response-note">
+          We aim to respond to all support emails within <strong>2 business days</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         FAQ
+         ======================================================== -->
+    <section aria-labelledby="faq-heading" class="faq-section">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+
+      <dl class="faq-list">
+        {faqs.map((item, i) => (
+          <div class="faq-item card" id={`faq-${i + 1}`}>
+            <dt>
+              <button
+                class="faq-question"
+                aria-expanded="false"
+                aria-controls={`faq-answer-${i + 1}`}
+                id={`faq-btn-${i + 1}`}
+              >
+                {item.q}
+                <span class="faq-chevron" aria-hidden="true">▾</span>
+              </button>
+            </dt>
+            <dd
+              class="faq-answer"
+              id={`faq-answer-${i + 1}`}
+              role="region"
+              aria-labelledby={`faq-btn-${i + 1}`}
+              hidden
+            >
+              <p>{item.a}</p>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  </article>
+</Base>
+
+<!-- Progressively-enhanced accordion — works without JS (answers shown) -->
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.faq-question');
+  buttons.forEach((btn) => {
+    const answerId = btn.getAttribute('aria-controls')!;
+    const answer = document.getElementById(answerId)!;
+
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (expanded) {
+        answer.setAttribute('hidden', '');
+      } else {
+        answer.removeAttribute('hidden');
+      }
+    });
+  });
+</script>
+
+<style>
+  article { max-width: 52rem; }
+
+  .page-intro {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    margin: 1rem 0 2.5rem;
+  }
+
+  /* Contact */
+  .contact-section { margin-bottom: 3rem; }
+  .contact-section h2 { margin-bottom: 1rem; }
+
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .contact-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+  .contact-type {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-email {
+    font-size: 1.0625rem;
+    font-weight: 600;
+  }
+
+  .response-note {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+    margin-top: 0;
+  }
+
+  /* FAQ */
+  .faq-section h2 { margin-bottom: 1.25rem; }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-item { padding: 0; }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    padding: 1.25rem 1.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-radius: var(--radius-md);
+    transition: background 0.15s;
+  }
+
+  .faq-question:hover {
+    background: rgba(167, 139, 250, 0.08);
+  }
+
+  .faq-question[aria-expanded="true"] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-chevron {
+    flex-shrink: 0;
+    color: var(--color-accent);
+    transition: transform 0.2s;
+  }
+
+  .faq-question[aria-expanded="true"] .faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-chevron { transition: none; }
+    .faq-question { transition: none; }
+  }
+
+  .faq-answer {
+    margin: 0;
+    padding: 1rem 1.75rem 1.25rem;
+    color: var(--color-text-muted);
+  }
+
+  .faq-answer p { margin: 0; }
+</style>
+

@@ -1,0 +1,382 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'JapChi — the daily dual-word puzzle game for iOS. Bridge two words through a cosmic rift every day.' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="theme-color" content="#0d0820" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="JapChi" />
+
+    <!-- Favicon placeholder -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <!-- Skip navigation link for keyboard/screen-reader users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
+      <nav aria-label="Site navigation">
+        <a href="/" class="nav-logo" aria-label="JapChi home">
+          <span aria-hidden="true">✦</span> JapChi
+        </a>
+        <ul role="list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/accessibility">Accessibility</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/support">Support</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+
+    <footer role="contentinfo">
+      <p>&copy; {new Date().getFullYear()} JapChi. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <ul role="list">
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/accessibility">Accessibility</a></li>
+          <li><a href="/support">Support</a></li>
+          <li><a href="mailto:privacy@playjapchi.online">privacy@playjapchi.online</a></li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  /* ============================================================
+     Design tokens — cosmic dark theme
+     All colour pairs meet WCAG 2.2 AA (≥ 4.5:1 for body text,
+     ≥ 3:1 for large text / UI components).
+     ============================================================ */
+  :root {
+    /* Background scale */
+    --color-bg:          #0d0820;   /* near-black with purple tint */
+    --color-bg-surface:  #160d30;   /* elevated card surface */
+    --color-bg-card:     #1e1245;   /* card / section background */
+
+    /* Purple gradient stops */
+    --color-purple-deep:  #2d1b69;
+    --color-purple-mid:   #6b3fa0;
+    --color-purple-light: #a78bfa;  /* ≥4.5:1 on --color-bg */
+
+    /* Accent / highlight */
+    --color-accent:      #c084fc;   /* ≥4.5:1 on --color-bg */
+    --color-accent-hover:#d8b4fe;
+
+    /* Text */
+    --color-text:        #f1e9ff;   /* ~18:1 on --color-bg */
+    --color-text-muted:  #c4b5fd;   /* ≥4.5:1 on --color-bg */
+    --color-text-link:   #d8b4fe;   /* ≥4.5:1 on --color-bg, underlined */
+
+    /* Borders */
+    --color-border:      #3d2480;
+
+    /* Focus ring — highly visible */
+    --focus-ring:        0 0 0 3px #f1e9ff, 0 0 0 6px #c084fc;
+
+    /* Spacing / radius */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+
+    /* Typography */
+    --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  /* ============================================================
+     Reset & base
+     ============================================================ */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Respect reduced-motion at all scroll & animation levels */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;   /* ~17px – comfortable reading size */
+    line-height: 1.65;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ============================================================
+     Focus styles — visible for keyboard users
+     ============================================================ */
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-sm);
+  }
+
+  /* Remove default :focus outline so :focus-visible rules apply cleanly */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* ============================================================
+     Skip link
+     ============================================================ */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 9999;
+    background: var(--color-accent);
+    color: #0d0820;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    text-decoration: none;
+    transition: top 0.15s;
+  }
+  .skip-link:focus {
+    top: 1rem;
+    outline: 3px solid #0d0820;
+    outline-offset: 2px;
+  }
+
+  /* ============================================================
+     Typography
+     ============================================================ */
+  h1, h2, h3, h4 {
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  h1 { font-size: clamp(2rem, 5vw + 1rem, 3.5rem); }
+  h2 { font-size: clamp(1.5rem, 3vw + 0.5rem, 2.25rem); margin-bottom: 1rem; }
+  h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+
+  p { margin-bottom: 1rem; }
+  p:last-child { margin-bottom: 0; }
+
+  a {
+    color: var(--color-text-link);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  a:hover { color: var(--color-accent-hover); }
+
+  ul, ol { padding-left: 1.5rem; }
+  li { margin-bottom: 0.4rem; }
+
+  /* ============================================================
+     Header / Nav
+     ============================================================ */
+  header {
+    background: rgba(13, 8, 32, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  header nav {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0.875rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-accent);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+  .nav-logo:hover { color: var(--color-accent-hover); }
+
+  header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  header nav a:not(.nav-logo) {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    transition: color 0.15s;
+  }
+  header nav a:not(.nav-logo):hover { color: var(--color-text); }
+
+  /* ============================================================
+     Main & Footer
+     ============================================================ */
+  main {
+    flex: 1;
+    max-width: 72rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  /* Allow main to be focused (for skip link target) without visible ring */
+  main:focus { outline: none; }
+
+  footer {
+    background: var(--color-bg-surface);
+    border-top: 1px solid var(--color-border);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  footer nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
+  footer nav a {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  /* ============================================================
+     Utility classes
+     ============================================================ */
+  .card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+  }
+
+  .badge-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--color-purple-mid), var(--color-accent));
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    border: 2px solid transparent;
+    transition: filter 0.15s, transform 0.15s;
+  }
+  .badge-cta:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+    color: #fff;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .badge-cta { transition: none; transform: none; }
+    .badge-cta:hover { transform: none; }
+  }
+
+  .badge-cta-secondary {
+    background: transparent;
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+  }
+  .badge-cta-secondary:hover {
+    background: rgba(192, 132, 252, 0.1);
+    color: var(--color-accent-hover);
+    filter: none;
+    transform: translateY(-2px);
+  }
+
+  .section-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #c084fc, #f0abfc, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .draft-notice {
+    background: rgba(251, 191, 36, 0.12);
+    border: 2px solid #fbbf24;
+    border-radius: var(--radius-md);
+    padding: 1rem 1.5rem;
+    color: #fde68a;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  .todo-block {
+    background: rgba(99, 102, 241, 0.12);
+    border: 2px dashed #6366f1;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    color: #a5b4fc;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    margin: 1.5rem 0;
+  }
+
+  /* ============================================================
+     Responsive helpers
+     ============================================================ */
+  @media (max-width: 640px) {
+    main { padding: 2rem 1rem 4rem; }
+    header nav { gap: 1rem; padding: 0.75rem 1rem; }
+  }
+</style>
+

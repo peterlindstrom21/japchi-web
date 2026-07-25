@@ -1,0 +1,244 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="JapChi — Daily Dual-Word Puzzle for iOS">
+  <!-- ============================================================
+       Hero
+       ============================================================ -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-glow" aria-hidden="true"></div>
+
+    <p class="section-label">New puzzle every day</p>
+    <h1 id="hero-heading">
+      <span class="gradient-text">Bridge the Rift.</span><br />
+      One puzzle, two words, infinite challenge.
+    </h1>
+
+    <p class="hero-sub">
+      JapChi is a daily dual-word puzzle game for iOS. Every day you receive
+      two mystery words separated by a cosmic <strong>rift</strong>. Your
+      mission: discover the hidden connection and close the rift in as few
+      guesses as possible.
+    </p>
+
+    <div class="cta-group" role="group" aria-label="Download options">
+      <!-- App Store badge placeholder — replace href with real App Store URL before launch -->
+      <a
+        href="https://apps.apple.com"
+        class="badge-cta app-store-badge"
+        aria-label="Download JapChi on the App Store (link coming soon)"
+        aria-describedby="app-store-note"
+        rel="noopener noreferrer"
+      >
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        Download on the App Store
+      </a>
+
+      <!-- TestFlight beta link placeholder — replace href with real TestFlight invite URL before launch -->
+      <a
+        href="https://testflight.apple.com"
+        class="badge-cta badge-cta-secondary"
+        aria-label="Join the JapChi beta on TestFlight (link coming soon)"
+        aria-describedby="testflight-note"
+        rel="noopener noreferrer"
+      >
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2a10 10 0 1 1 0 20A10 10 0 0 1 12 2zm1 5h-2v6l5.25 3.15.75-1.23-4-2.42V7z"/>
+        </svg>
+        Join the Beta (TestFlight)
+      </a>
+    </div>
+
+    <p id="app-store-note" class="badge-note" role="note">
+      App Store link coming soon — currently in TestFlight beta.
+    </p>
+    <p id="testflight-note" class="badge-note" role="note">
+      TestFlight invite link will be added before public launch.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       How it works — The Rift mechanic
+       ============================================================ -->
+  <section class="how-section" aria-labelledby="how-heading">
+    <h2 id="how-heading">How the Rift Works</h2>
+    <div class="rift-demo" aria-label="Rift mechanic illustration">
+      <div class="rift-word" aria-label="Starting word">MOON</div>
+      <div class="rift-gap" aria-label="The rift — the hidden connection">
+        <span class="rift-line" aria-hidden="true"></span>
+        <span class="rift-icon" aria-hidden="true">⟡</span>
+        <span class="rift-line" aria-hidden="true"></span>
+      </div>
+      <div class="rift-word" aria-label="Ending word">LIGHT</div>
+    </div>
+
+    <div class="rift-explanation card">
+      <p>
+        Each day, JapChi places two words on opposite sides of the <em>rift</em> —
+        a conceptual gap that only one hidden bridge word can close. You guess
+        candidate bridge words one at a time; the game scores each guess by how
+        semantically close it sits to both target words, pulling the rift walls
+        together with every correct attempt.
+      </p>
+      <p>
+        When the rift fully closes, the puzzle is solved — but your score depends
+        on how efficiently you bridged it. Share your result emoji pattern on social
+        media and compare with friends who tackled the same daily rift.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Features
+       ============================================================ -->
+  <section class="features-section" aria-labelledby="features-heading">
+    <h2 id="features-heading">Why JapChi?</h2>
+    <ul class="features-grid" role="list">
+      <li class="card feature-card">
+        <span class="feature-icon" aria-hidden="true">🌌</span>
+        <h3>Daily challenge</h3>
+        <p>One fresh rift every day at midnight, shared by every player worldwide.</p>
+      </li>
+      <li class="card feature-card">
+        <span class="feature-icon" aria-hidden="true">♾️</span>
+        <h3>Streak tracking</h3>
+        <p>Build your streak, track your personal bests, and see daily stats on the leaderboard.</p>
+      </li>
+      <li class="card feature-card">
+        <span class="feature-icon" aria-hidden="true">♿</span>
+        <h3>Accessible by design</h3>
+        <p>Built with VoiceOver, Dynamic Type, and colorblind-friendly modes from day one.</p>
+      </li>
+      <li class="card feature-card">
+        <span class="feature-icon" aria-hidden="true">🔒</span>
+        <h3>Privacy first</h3>
+        <p>No ads. No analytics sold to third parties. Game stats stored securely in your account.</p>
+      </li>
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 4rem 0 5rem;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(109,40,217,0.35) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .hero h1 { margin: 0.75rem 0 1.5rem; }
+
+  .hero-sub {
+    max-width: 42rem;
+    margin: 0 auto 2.5rem;
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+  }
+
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .app-store-badge {
+    background: linear-gradient(135deg, #1a0533, var(--color-purple-mid));
+    border: 2px solid var(--color-accent);
+  }
+
+  .badge-note {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .how-section { margin: 4rem 0; }
+
+  .rift-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2rem 0 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .rift-word {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: var(--color-accent);
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.6rem 1.25rem;
+  }
+
+  .rift-gap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    max-width: 180px;
+    min-width: 80px;
+  }
+
+  .rift-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-purple-mid), var(--color-accent));
+  }
+
+  .rift-icon {
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    animation: pulse-rift 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-rift {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rift-icon { animation: none; }
+  }
+
+  .rift-explanation p { color: var(--color-text-muted); }
+  .rift-explanation p:first-child { margin-bottom: 0.75rem; }
+
+  .features-section { margin: 4rem 0 0; }
+
+  .features-grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+</style>

@@ -1,0 +1,142 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Accessibility — JapChi"
+  description="JapChi is built to be playable by everyone. Learn about our VoiceOver, colorblind, and Dynamic Type support."
+>
+  <article aria-labelledby="a11y-heading">
+    <p class="section-label">Inclusive design</p>
+    <h1 id="a11y-heading">Accessibility</h1>
+    <p class="page-intro">
+      JapChi is being submitted for an <strong>Apple Accessibility Award</strong> because
+      we believe great puzzle games should be playable by everyone. This page describes
+      our commitment and the specific features we've built.
+    </p>
+
+    <!-- ========================================================
+         TODO block — owner fills in copy before launch
+         ======================================================== -->
+    <div class="todo-block" role="note" aria-label="Content placeholder for accessibility features">
+      <p>
+        <strong>TODO (owner):</strong> Fill in the copy below with specific feature
+        descriptions. Placeholder sections are provided as a structural guide.
+      </p>
+      <pre aria-hidden="true">
+## Sections to complete:
+  1. VoiceOver &amp; Screen Reader Support
+  2. Colorblind Modes
+  3. Dynamic Type &amp; Font Scaling
+  4. Reduced Motion
+  5. High Contrast Mode
+  6. Keyboard / Switch Access
+  7. Compliance statement (WCAG 2.2 AA)
+      </pre>
+    </div>
+
+    <section aria-labelledby="voiceover-heading">
+      <h2 id="voiceover-heading">VoiceOver &amp; Screen Reader Support</h2>
+      <div class="card content-card">
+        <!-- TODO: Replace placeholder text with real VoiceOver feature descriptions -->
+        <p class="placeholder-text">
+          <em>[TODO: Describe how VoiceOver users experience the game — tile announcements,
+          game state updates, score feedback, custom actions, etc.]</em>
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="colorblind-heading">
+      <h2 id="colorblind-heading">Colorblind-Friendly Modes</h2>
+      <div class="card content-card">
+        <!-- TODO: Replace placeholder text with colorblind mode descriptions -->
+        <p class="placeholder-text">
+          <em>[TODO: List the colorblind palette options available — Deuteranopia,
+          Protanopia, Tritanopia, Monochromacy — and how to enable them in Settings.]</em>
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="dynamic-type-heading">
+      <h2 id="dynamic-type-heading">Dynamic Type &amp; Font Scaling</h2>
+      <div class="card content-card">
+        <p class="placeholder-text">
+          <em>[TODO: Describe Dynamic Type support — which text sizes are supported,
+          how layout adapts at larger sizes.]</em>
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="motion-heading">
+      <h2 id="motion-heading">Reduced Motion</h2>
+      <div class="card content-card">
+        <p class="placeholder-text">
+          <em>[TODO: Describe how the app responds to iOS Reduce Motion — which
+          animations are removed or replaced with cross-fades.]</em>
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="contrast-heading">
+      <h2 id="contrast-heading">High Contrast &amp; Bold Text</h2>
+      <div class="card content-card">
+        <p class="placeholder-text">
+          <em>[TODO: Describe support for iOS Increase Contrast and Bold Text settings.]</em>
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="switch-heading">
+      <h2 id="switch-heading">Switch Control &amp; Keyboard Access</h2>
+      <div class="card content-card">
+        <p class="placeholder-text">
+          <em>[TODO: Describe Switch Control scanning order, focus management, and
+          any hardware keyboard shortcuts.]</em>
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="compliance-heading">
+      <h2 id="compliance-heading">Compliance</h2>
+      <div class="card content-card">
+        <p class="placeholder-text">
+          <em>[TODO: Add WCAG 2.2 conformance statement, link to VPAT if available,
+          and contact details for accessibility feedback.]</em>
+        </p>
+        <p>
+          To report an accessibility issue, please email
+          <a href="mailto:support@playjapchi.online">support@playjapchi.online</a>.
+          We aim to respond within 2 business days.
+        </p>
+      </div>
+    </section>
+  </article>
+</Base>
+
+<style>
+  article { max-width: 52rem; }
+
+  .page-intro {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    margin: 1rem 0 2rem;
+    max-width: 42rem;
+  }
+
+  section {
+    margin-top: 2.5rem;
+  }
+
+  section h2 {
+    margin-bottom: 1rem;
+  }
+
+  .content-card {
+    margin-top: 0;
+  }
+
+  .placeholder-text {
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+</style>
+
