@@ -6,7 +6,7 @@
         "components": [
           {
             "/": "/*",
-            "comment": "Match all paths on playjapchi.online"
+            "comment": "Match all paths on japchi.com"
           }
         ]
       }
