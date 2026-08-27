@@ -4,7 +4,7 @@ export interface Props {
   description?: string;
 }
 
-const { title, description = 'JapChi — the twice-daily dual-word puzzle game for iOS. Play Morning Game 1 from 12:00 AM–11:59 AM ET and Evening Game 2 from 12:00 PM–11:59 PM ET.' } = Astro.props;
+const { title, description = 'JopChi — the twice-daily dual-word puzzle game for iOS. Play Morning Game 1 from 12:00 AM–11:59 AM ET and Evening Game 2 from 12:00 PM–11:59 PM ET.' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
@@ -22,7 +22,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:site_name" content="JapChi" />
+    <meta property="og:site_name" content="JopChi" />
 
     <!-- Favicon placeholder -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -33,8 +33,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <header role="banner">
       <nav aria-label="Site navigation">
-        <a href="/" class="nav-logo" aria-label="JapChi home">
-          <span aria-hidden="true">✦</span> JapChi
+        <a href="/" class="nav-logo" aria-label="JopChi home">
+          <span aria-hidden="true">✦</span> JopChi
         </a>
         <ul role="list">
           <li><a href="/">Home</a></li>
@@ -50,13 +50,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </main>
 
     <footer role="contentinfo">
-      <p>&copy; {new Date().getFullYear()} JapChi. All rights reserved.</p>
+      <p>&copy; {new Date().getFullYear()} JopChi. All rights reserved.</p>
       <nav aria-label="Footer navigation">
         <ul role="list">
           <li><a href="/privacy">Privacy Policy</a></li>
           <li><a href="/accessibility">Accessibility</a></li>
           <li><a href="/support">Support</a></li>
-          <li><a href="mailto:privacy@japchi.com">privacy@japchi.com</a></li>
+          <li><a href="mailto:privacy@jopchi.com">privacy@jopchi.com</a></li>
         </ul>
       </nav>
     </footer>

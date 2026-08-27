@@ -1,10 +1,10 @@
-# JapChi marketing site
+# JopChi marketing site
 
-Static Astro site for JapChi, a cosmic dual-word puzzle game for iOS.
+Static Astro site for JopChi, a cosmic dual-word puzzle game for iOS.
 
 ## Schedule
 
-JapChi runs **two games per day** in US Eastern time:
+JopChi runs **two games per day** in US Eastern time:
 
 - **Morning Game 1:** 12:00 AM – 11:59 AM ET
 - **Evening Game 2:** 12:00 PM – 11:59 PM ET
@@ -33,7 +33,7 @@ npm run build
 1. Push the repository to GitHub and enable **Pages** for the repo.
 2. Set the Pages source to **GitHub Actions**.
 3. In the repo settings, add the custom domain:
-   - `japchi.com`
+   - `jopchi.com`
 4. In Spaceship DNS, point the apex domain to GitHub Pages:
    - `A` records for `@`:
 	 - `185.199.108.153`
@@ -45,11 +45,11 @@ npm run build
 	 - `2606:50c0:8001::153`
 	 - `2606:50c0:8002::153`
 	 - `2606:50c0:8003::153`
-5. Wait for GitHub Pages to verify the custom domain, then the site will serve at `https://japchi.com`.
+5. Wait for GitHub Pages to verify the custom domain, then the site will serve at `https://jopchi.com`.
 
 Notes:
 
-- The `public/CNAME` file is already set to `japchi.com`.
+- The `public/CNAME` file is already set to `jopchi.com`.
 - The GitHub Actions workflow in `.github/workflows/deploy.yml` builds on push to `main` and deploys the `dist/` artifact.
-- If you also want `www.japchi.com`, add a `CNAME` record for `www` pointing to the GitHub Pages host you choose and redirect it to the apex domain.
+- If you also want `www.jopchi.com`, add a `CNAME` record for `www` pointing to the GitHub Pages host you choose and redirect it to the apex domain.
 

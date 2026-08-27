@@ -2,18 +2,18 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["TEAMID_PLACEHOLDER.online.playjapchi"],
+        "appIDs": ["TEAMID_PLACEHOLDER.online.playjopchi"],
         "components": [
           {
             "/": "/*",
-            "comment": "Match all paths on japchi.com"
+            "comment": "Match all paths on jopchi.com"
           }
         ]
       }
     ]
   },
   "webcredentials": {
-    "apps": ["TEAMID_PLACEHOLDER.online.playjapchi"]
+    "apps": ["TEAMID_PLACEHOLDER.online.playjopchi"]
   }
 }
 
