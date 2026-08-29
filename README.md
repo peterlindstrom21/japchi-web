@@ -4,10 +4,10 @@ Static Astro site for JopChi, a cosmic dual-word puzzle game for iOS.
 
 ## Schedule
 
-JopChi runs **two games per day** in US Eastern time:
+JopChi runs **two games per day** in US Pacific time:
 
-- **Morning Game 1:** 12:00 AM – 11:59 AM ET
-- **Evening Game 2:** 12:00 PM – 11:59 PM ET
+- **Morning Game 1:** 12:00 AM – 11:59 AM PT
+- **Evening Game 2:** 12:00 PM – 11:59 PM PT
 
 ## Development
 
