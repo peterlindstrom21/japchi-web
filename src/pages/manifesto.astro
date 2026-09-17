@@ -1,0 +1,149 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Manifesto — JopChi"
+  description="JopChi does not audition for the present. A twice-daily dual-word puzzle that keeps the record without turning that record into a parade."
+>
+  <article class="manifesto" aria-labelledby="manifesto-heading">
+    <p class="section-label">Manifesto</p>
+    <h1 id="manifesto-heading">
+      <span class="gradient-text">JopChi does not audition for the present.</span>
+    </h1>
+
+    <div class="manifesto-body">
+      <p>
+        It refuses the arms race of polish, the fattening of every tap into a
+        campaign, the demand that a pastime shout to be counted. Twice a day the
+        rift opens — two hidden words, a narrow window, a single job: find the
+        bond between them and close the tear in as few guesses as the mind will
+        allow. Then the board goes still. You pick it up. You put it down. It
+        keeps the record without turning that record into a parade.
+      </p>
+      <p>
+        Under it runs a score we will not apologize for: the best music ever
+        written for two words and a clock. Not a menu loop begging for gold, not
+        a trailer wearing an orchestra. A composed weather. It arrives when the
+        rift does, and it leaves when you do.
+      </p>
+      <p>
+        The work lives on the pocket screen, patient about sign-in, stubborn
+        about the day&rsquo;s two appointments, and built so the puzzle does not
+        require one kind of body. Sight is welcome. It is not required. Color is
+        a dialect, not a gate. Type grows. Motion can sit down. Contrast can
+        shout. Switch and keyboard walk the same board as a thumb. The cosmos of
+        two words was never meant to be a private club.
+      </p>
+    </div>
+
+    <blockquote class="manifesto-pull">
+      <p>
+        If modern software is a floodlight, JopChi is a lamp you aim yourself.
+      </p>
+    </blockquote>
+
+    <section aria-labelledby="offers-heading">
+      <h2 id="offers-heading">What it offers</h2>
+      <ul class="offers-list" role="list">
+        <li class="card">
+          <strong>Morning Game 1 and Evening Game 2</strong> — two words each,
+          one scheduled challenge, no season to enlist in
+        </li>
+        <li class="card">
+          <strong>A ledger of how you showed up</strong>, held back until you
+          choose to look
+        </li>
+        <li class="card">
+          <strong>Sound, switch, and stillness</strong> as first-class paths, not
+          a retrofit
+        </li>
+        <li class="card">
+          <strong>Palettes, type, and contrast</strong> that follow the player
+          instead of scolding them
+        </li>
+        <li class="card">
+          <strong>A soundtrack</strong> that treats a daily puzzle as if it
+          deserved a cathedral
+        </li>
+        <li class="card">
+          <strong>No obligation to broadcast</strong>; the session can end in the
+          room it began
+        </li>
+      </ul>
+    </section>
+
+    <p class="manifesto-footer-note">
+      Curious how the accessibility claims are actually implemented? <a href="/accessibility">Read the accessibility page</a>.
+    </p>
+  </article>
+</Base>
+
+<style>
+  .manifesto { max-width: 46rem; }
+
+  .manifesto h1 {
+    text-wrap: balance;
+    margin-bottom: 2rem;
+  }
+
+  /* Slightly larger, looser measure — this page is meant to be read, not scanned */
+  .manifesto-body {
+    font-size: 1.1875rem;
+    line-height: 1.75;
+  }
+
+  .manifesto-body p {
+    margin-bottom: 1.5rem;
+  }
+
+  /* The opening paragraph continues directly from the h1, so it gets a lead-in
+     weight rather than a drop cap (which would split the word "It"). */
+  .manifesto-body p:first-child {
+    font-size: 1.25rem;
+    color: var(--color-text);
+  }
+
+  .manifesto-pull {
+    margin: 2.5rem 0;
+    padding: 1.75rem 2rem;
+    border-left: 4px solid var(--color-accent);
+    background: var(--color-bg-surface);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
+  .manifesto-pull p {
+    font-size: clamp(1.25rem, 2vw + 0.75rem, 1.625rem);
+    line-height: 1.35;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  .manifesto section { margin-top: 3rem; }
+
+  .offers-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .offers-list li {
+    margin-bottom: 0;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .offers-list strong { color: var(--color-accent); }
+
+  .manifesto-footer-note {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+  }
+
+  @media (max-width: 640px) {
+    .manifesto-body { font-size: 1.0625rem; }
+    .manifesto-pull { padding: 1.25rem 1.25rem; }
+  }
+</style>

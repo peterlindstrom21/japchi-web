@@ -38,6 +38,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         </a>
         <ul role="list">
           <li><a href="/">Home</a></li>
+          <li><a href="/manifesto">Manifesto</a></li>
           <li><a href="/accessibility">Accessibility</a></li>
           <li><a href="/privacy">Privacy</a></li>
           <li><a href="/support">Support</a></li>
@@ -53,6 +54,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <p>&copy; {new Date().getFullYear()} JopChi. All rights reserved.</p>
       <nav aria-label="Footer navigation">
         <ul role="list">
+          <li><a href="/manifesto">Manifesto</a></li>
           <li><a href="/privacy">Privacy Policy</a></li>
           <li><a href="/accessibility">Accessibility</a></li>
           <li><a href="/support">Support</a></li>
@@ -358,17 +360,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     color: #fde68a;
     font-weight: 600;
     margin-bottom: 2rem;
-  }
-
-  .todo-block {
-    background: rgba(99, 102, 241, 0.12);
-    border: 2px dashed #6366f1;
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
-    color: #a5b4fc;
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    margin: 1.5rem 0;
   }
 
   /* ============================================================
