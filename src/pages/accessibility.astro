@@ -3,108 +3,288 @@ import Base from '../layouts/Base.astro';
 ---
 <Base
   title="Accessibility — JopChi"
-  description="JopChi is built to be playable by everyone. Learn about our VoiceOver, colorblind, and Dynamic Type support."
+  description="How JopChi makes a two-word puzzle playable without relying on colour: Geometry mode, validated palettes, and an honest account of what is not built yet."
 >
   <article aria-labelledby="a11y-heading">
     <p class="section-label">Inclusive design</p>
     <h1 id="a11y-heading">Accessibility</h1>
     <p class="page-intro">
-      JopChi is being submitted for an <strong>Apple Accessibility Award</strong> because
-      we believe great puzzle games should be playable by everyone. This page describes
-      our commitment and the specific features we've built.
+      JopChi hides two words at once. Almost every accessibility decision below
+      falls out of that one fact — because the thing a player has to perceive is
+      not <em>what colour is this tile</em>, it is <strong>which of two words
+      does this letter belong to</strong>.
+    </p>
+    <p class="page-intro">
+      That question has a natural answer in space (left and right), in shape
+      (which half of a diagonal), and in language (&ldquo;the left word&rdquo;).
+      It has a poor answer in hue. So hue is the one channel we refuse to depend
+      on.
     </p>
 
-    <!-- ========================================================
-         TODO block — owner fills in copy before launch
-         ======================================================== -->
-    <div class="todo-block" role="note" aria-label="Content placeholder for accessibility features">
-      <p>
-        <strong>TODO (owner):</strong> Fill in the copy below with specific feature
-        descriptions. Placeholder sections are provided as a structural guide.
-      </p>
-      <pre aria-hidden="true">
-## Sections to complete:
-  1. VoiceOver &amp; Screen Reader Support
-  2. Colorblind Modes
-  3. Dynamic Type &amp; Font Scaling
-  4. Reduced Motion
-  5. High Contrast Mode
-  6. Keyboard / Switch Access
-  7. Compliance statement (WCAG 2.2 AA)
-      </pre>
-    </div>
-
-    <section aria-labelledby="voiceover-heading">
-      <h2 id="voiceover-heading">VoiceOver &amp; Screen Reader Support</h2>
+    <section aria-labelledby="principle-heading">
+      <h2 id="principle-heading">The principle</h2>
       <div class="card content-card">
-        <!-- TODO: Replace placeholder text with real VoiceOver feature descriptions -->
-        <p class="placeholder-text">
-          <em>[TODO: Describe how VoiceOver users experience the game — tile announcements,
-          game state updates, score feedback, custom actions, etc.]</em>
+        <blockquote class="a11y-quote">
+          <p>
+            Accessibility gives equal access to the same information — never
+            more, and never less.
+          </p>
+        </blockquote>
+        <p>
+          This cuts both ways, and the second direction is the one that is easy
+          to get wrong. Before the Split, JopChi deliberately hides <em>which</em> word a
+          misplaced letter belongs to. That ambiguity is
+          the central mechanic.
+        </p>
+        <p>
+          Internally we always know the answer, so it would be trivial to pan a
+          misplaced letter&rsquo;s earcon to the left, or draw its glyph in the
+          left half. <strong>We deliberately throw that information away.</strong> A
+          blind player must not be told something a sighted player cannot see.
+          Doing otherwise would be unfairness dressed as inclusion. A test
+          asserts it stays that way.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="geometry-heading">
+      <h2 id="geometry-heading">Geometry mode — reading the board without colour</h2>
+      <div class="card content-card">
+        <p>
+          Each tile is bisected corner to corner. <strong>Lower-left is Word A,
+          upper-right is Word B.</strong> Three orthogonal channels carry the
+          state, any one of which is sufficient on its own:
+        </p>
+        <div class="table-scroll">
+          <table>
+            <caption class="sr-caption">Channels that encode tile state in Geometry mode</caption>
+            <thead>
+              <tr><th scope="col">Channel</th><th scope="col">What it encodes</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Position</th>
+                <td>Which half of the diagonal is marked &rarr; which word</td>
+              </tr>
+              <tr>
+                <th scope="row">Shape</th>
+                <td>Diamond = locked in both &middot; ring = misplaced &middot; empty = absent</td>
+              </tr>
+              <tr>
+                <th scope="row">Stroke</th>
+                <td><strong>Dashed = unresolved &middot; solid = resolved</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          An ambiguous misplaced letter is drawn as a <em>literally incomplete
+          outline</em> centred on the seam — belonging to neither half yet — and
+          it closes and moves into its half when the Split resolves it. The
+          Split becomes legible with no colour and no sound at all.
+        </p>
+        <p>
+          Three visual modes are available in Settings: <strong>Classic</strong>, <strong>Geometry</strong>, and <strong>High Contrast Geometry</strong>,
+          which thickens keylines and drops the softened halo for a harder edge.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="why-geometry-heading">
+      <h2 id="why-geometry-heading">Why Geometry has to exist</h2>
+      <div class="card content-card">
+        <p>
+          We measured the shipped Classic palette to see how far apart Word A and
+          Word B actually sit under different kinds of colour vision:
+        </p>
+        <div class="table-scroll">
+          <table>
+            <caption class="sr-caption">Measured colour separation between Word A and Word B in the Classic palette</caption>
+            <thead>
+              <tr><th scope="col">Vision</th><th scope="col">Word A vs Word B</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Normal</th><td>&Delta;E 33</td></tr>
+              <tr><th scope="row">Protanopia</th><td>&Delta;E 13</td></tr>
+              <tr><th scope="row">Deuteranopia</th><td class="bad">&Delta;E 3</td></tr>
+              <tr><th scope="row">Greyscale</th><td class="bad">&Delta;E 2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Blue and purple become the same colour. <strong>No palette swap
+          rescues a design that encodes two words as two hues</strong> — the
+          shapes have to carry it. Classic stays pixel-identical for existing
+          players, and a test asserts that this failure <em>persists</em>,
+          because it is the justification for the whole feature.
         </p>
       </div>
     </section>
 
     <section aria-labelledby="colorblind-heading">
-      <h2 id="colorblind-heading">Colorblind-Friendly Modes</h2>
+      <h2 id="colorblind-heading">Colourblind-friendly palettes</h2>
       <div class="card content-card">
-        <!-- TODO: Replace placeholder text with colorblind mode descriptions -->
-        <p class="placeholder-text">
-          <em>[TODO: List the colorblind palette options available — Deuteranopia,
-          Protanopia, Tritanopia, Monochromacy — and how to enable them in Settings.]</em>
+        <p>Six palette options ship in Settings:</p>
+        <ul>
+          <li><strong>Classic</strong> — blue and purple</li>
+          <li><strong>Green-weak</strong> — blue and amber; the most common deficiency</li>
+          <li><strong>Red-weak</strong> — blue and amber, warmer</li>
+          <li><strong>Blue-weak</strong> — red and cyan</li>
+          <li><strong>No colour</strong> — four brightness steps, for total colour loss</li>
+          <li><strong>Custom</strong> — choose each colour yourself, checked as you go</li>
+        </ul>
+        <p>
+          Colour vision deficiency is not one condition, and a player often knows
+          which hues they can separate better than any preset does. Each preset
+          is validated against normal vision plus its own target deficiency —
+          not against all of them at once, since red-green and blue-yellow
+          deficiencies lose opposite axes, and satisfying every one forces the
+          board onto a pure luminance ladder. That ladder already exists as
+          the <strong>No colour</strong> preset, for the people who need it.
         </p>
       </div>
     </section>
 
-    <section aria-labelledby="dynamic-type-heading">
-      <h2 id="dynamic-type-heading">Dynamic Type &amp; Font Scaling</h2>
+    <section aria-labelledby="validator-heading">
+      <h2 id="validator-heading">The colour picker checks itself</h2>
       <div class="card content-card">
-        <p class="placeholder-text">
-          <em>[TODO: Describe Dynamic Type support — which text sizes are supported,
-          how layout adapts at larger sizes.]</em>
+        <p>
+          An unchecked picker is a <strong>hazard</strong>, not a feature —
+          nothing stops someone choosing two colours that turn out identical to
+          them mid-game. So every palette, preset or custom, goes through the
+          same check, and the result is shown rather than hidden.
+        </p>
+        <p>
+          The settings screen <strong>simulates the real board</strong> through
+          protanopia, deuteranopia, tritanopia and greyscale, using the same tile
+          glyphs the game renders, so the preview cannot drift from the game. The
+          person choosing usually cannot see the failure mode themselves; being
+          told a verdict is not the same as seeing it.
+        </p>
+        <h3>Why &Delta;E and not WCAG contrast</h3>
+        <p>
+          The first validator required a 3:1 WCAG contrast ratio between all four
+          tile states. Every palette failed, including hand-picked ones, and the
+          reason was arithmetic: four states each 3:1 apart needs 3&sup3; = 27:1
+          across the range, and the maximum possible ratio is 21:1. <strong>The bar was unreachable by construction.</strong>
+        </p>
+        <p>
+          WCAG contrast is also the wrong instrument here. It answers &ldquo;can
+          I read text on this background&rdquo; — a pure luminance question. The
+          question on a game board is &ldquo;are these two swatches telling me
+          different things&rdquo;, where hue and chroma carry real information
+          right up until a deficiency removes them. The validator uses <strong>CIE76
+          &Delta;E in Lab</strong>, which counts luminance <em>and</em> hue and
+          degrades correctly when a simulation collapses an axis. The threshold is 25, comfortably above &ldquo;noticeable&rdquo;
+          (~2.3).
+        </p>
+        <h3>Swatches, not a colour wheel</h3>
+        <p>
+          A hue/saturation wheel needs precise dragging — poor with motor
+          impairments, effectively unusable with a screen reader. Discrete
+          swatches are a list of buttons, which VoiceOver handles natively. They
+          are labelled by <strong>role and position</strong> (&ldquo;Left word,
+          option 7 of 24&rdquo;), never by colour name, because
+          &ldquo;blue&rdquo; is not useful information to the people most likely
+          to be on this screen.
         </p>
       </div>
     </section>
 
     <section aria-labelledby="motion-heading">
-      <h2 id="motion-heading">Reduced Motion</h2>
+      <h2 id="motion-heading">Reduced motion</h2>
       <div class="card content-card">
-        <p class="placeholder-text">
-          <em>[TODO: Describe how the app responds to iOS Reduce Motion — which
-          animations are removed or replaced with cross-fades.]</em>
+        <p>
+          Tiles watch the iOS <strong>Reduce Motion</strong> setting and respond
+          live, without a restart. When it is on, the tile reveal drops its 3D
+          rotation entirely and becomes a plain cross-fade. Turning the setting
+          on or off mid-game takes effect immediately.
         </p>
       </div>
     </section>
 
-    <section aria-labelledby="contrast-heading">
-      <h2 id="contrast-heading">High Contrast &amp; Bold Text</h2>
+    <section aria-labelledby="sharing-heading">
+      <h2 id="sharing-heading">Sharing without colour</h2>
       <div class="card content-card">
-        <p class="placeholder-text">
-          <em>[TODO: Describe support for iOS Increase Contrast and Bold Text settings.]</em>
+        <p>
+          A shared grid is the one artefact that lands in someone <em>else&rsquo;s</em> hands, and the sender cannot know how they see colour. JopChi&rsquo;s
+          share format uses shapes rather than coloured squares, carrying
+          identical information with no hue at all — and because it is keyed off
+          tile state rather than tile colour, it preserves the
+          resolved/unresolved distinction that colour alone cannot express. A
+          test asserts no coloured emoji can appear in share output.
         </p>
       </div>
     </section>
 
-    <section aria-labelledby="switch-heading">
-      <h2 id="switch-heading">Switch Control &amp; Keyboard Access</h2>
+    <section aria-labelledby="verified-heading">
+      <h2 id="verified-heading">How this is verified</h2>
       <div class="card content-card">
-        <p class="placeholder-text">
-          <em>[TODO: Describe Switch Control scanning order, focus management, and
-          any hardware keyboard shortcuts.]</em>
+        <p>
+          Screenshots prove a thing once, for one board, on one device. These
+          checks are structural and keep proving themselves as the game changes:
         </p>
+        <ul>
+          <li><strong>Classic is untouched</strong> — every colour &times; every state renders identically with and without accessibility state, plus a guard that Geometry genuinely differs</li>
+          <li><strong>All states distinguishable without colour</strong> — shape signatures are compared with every colour stripped; no two may collide</li>
+          <li><strong>Ambiguity is never leaked</strong> — pre-Split misplaced letters must stay ambiguous</li>
+          <li><strong>Every preset is usable</strong> — each validated against its own target deficiency</li>
+          <li><strong>The picker is not a trap</strong> — a search of the real swatch list proves valid combinations are reachable, including one that survives total colour loss</li>
+          <li><strong>Share carries no colour</strong></li>
+        </ul>
       </div>
     </section>
 
-    <section aria-labelledby="compliance-heading">
-      <h2 id="compliance-heading">Compliance</h2>
+    <section aria-labelledby="progress-heading">
+      <h2 id="progress-heading">Still in progress</h2>
+      <div class="card content-card in-progress">
+        <p>
+          Stated plainly, because a partial accessibility feature that claims
+          completeness is worse than one that does not:
+        </p>
+        <ul>
+          <li>
+            <strong>Stereo Rift audio.</strong> The state model, pan mapping and
+            sweep semantics are implemented and tested; the sound engine is not.
+            This needs pre-panned stereo assets and a native audio dependency.
+          </li>
+          <li>
+            <strong>Haptics.</strong> The vocabulary is designed, not yet wired.
+          </li>
+          <li>
+            <strong>VoiceOver labels for the board.</strong> Buttons and controls
+            throughout the app are labelled today, and the functions that
+            describe a tile and summarise a row are written and tested — but they
+            are not yet attached to the board itself.
+          </li>
+          <li>
+            <strong>Accessible Split placement.</strong> Needs an adjustable
+            control and its announcements.
+          </li>
+          <li>
+            <strong>Dynamic Type on the board.</strong> Tiles currently pin their
+            font size so the grid cannot break its layout. Scaling the board with
+            the system text size is not solved yet.
+          </li>
+          <li>
+            <strong>Switch Control and hardware keyboard.</strong> Not yet a
+            deliberately designed path through the board.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="feedback-heading">
+      <h2 id="feedback-heading">Feedback</h2>
       <div class="card content-card">
-        <p class="placeholder-text">
-          <em>[TODO: Add WCAG 2.2 conformance statement, link to VPAT if available,
-          and contact details for accessibility feedback.]</em>
+        <p>
+          This site&rsquo;s own colour pairs are built to meet WCAG 2.2 AA, with
+          a visible focus ring, a skip link, and reduced-motion support
+          throughout.
         </p>
         <p>
-          To report an accessibility issue, please email
-          <a href="mailto:support@jopchi.com">support@jopchi.com</a>.
+          If something here does not work for you — on the site or in the app —
+          we want to know. Email <a href="mailto:support@jopchi.com">support@jopchi.com</a>.
           We aim to respond within 2 business days.
         </p>
       </div>
@@ -118,9 +298,10 @@ import Base from '../layouts/Base.astro';
   .page-intro {
     font-size: 1.125rem;
     color: var(--color-text-muted);
-    margin: 1rem 0 2rem;
+    margin: 1rem 0 1rem;
     max-width: 42rem;
   }
+  .page-intro:last-of-type { margin-bottom: 2rem; }
 
   section {
     margin-top: 2.5rem;
@@ -130,13 +311,76 @@ import Base from '../layouts/Base.astro';
     margin-bottom: 1rem;
   }
 
+  section h3 {
+    margin-top: 1.75rem;
+    color: var(--color-accent);
+  }
+
   .content-card {
     margin-top: 0;
   }
 
-  .placeholder-text {
-    color: var(--color-text-muted);
-    font-style: italic;
+  .a11y-quote {
+    border-left: 4px solid var(--color-accent);
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    margin-bottom: 1.25rem;
   }
-</style>
 
+  .a11y-quote p {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  /* Wide tables must scroll in their own container, never the page */
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1.25rem 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9375rem;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 0.625rem 0.875rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  thead th {
+    color: var(--color-accent);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  tbody th {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  td.bad { color: #fca5a5; font-weight: 600; }
+
+  /* Visually hidden, still announced */
+  .sr-caption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .in-progress {
+    border-color: #fbbf24;
+    background: rgba(251, 191, 36, 0.08);
+  }
+
+  .in-progress li { margin-bottom: 0.75rem; }
+  .in-progress strong { color: #fde68a; }
+
+  .content-card ul { margin-top: 0.75rem; }
+</style>
