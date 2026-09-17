@@ -94,6 +94,8 @@ import Base from '../layouts/Base.astro';
 
   .manifesto-body p {
     margin-bottom: 1.5rem;
+    /* Avoid single-word last lines in long prose */
+    text-wrap: pretty;
   }
 
   /* The opening paragraph continues directly from the h1, so it gets a lead-in
@@ -143,7 +145,18 @@ import Base from '../layouts/Base.astro';
   }
 
   @media (max-width: 640px) {
-    .manifesto-body { font-size: 1.0625rem; }
-    .manifesto-pull { padding: 1.25rem 1.25rem; }
+    .manifesto h1 { margin-bottom: 1.5rem; }
+
+    /* Tighter leading and a smaller lead-in: at this measure the desktop
+       values gave an 11-line opening paragraph. The first-child rule has to
+       be restated here — it out-specifies .manifesto-body on its own. */
+    .manifesto-body { font-size: 1.0625rem; line-height: 1.6; }
+    .manifesto-body p:first-child { font-size: 1.125rem; }
+    .manifesto-body p { margin-bottom: 1.25rem; }
+
+    .manifesto-pull { margin: 2rem 0; padding: 1.25rem 1.25rem; }
+    .manifesto section { margin-top: 2.25rem; }
+    .offers-list li { padding: 1rem 1.125rem; }
+    .manifesto-footer-note { margin-top: 2.25rem; }
   }
 </style>
