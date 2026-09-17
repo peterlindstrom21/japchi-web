@@ -367,7 +367,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
      ============================================================ */
   @media (max-width: 640px) {
     main { padding: 2rem 1rem 4rem; }
-    header nav { gap: 1rem; padding: 0.75rem 1rem; }
+
+    /* Five links wrapped onto their own rows here, costing ~166px of a phone
+       screen before any content. Stack the logo above a single tighter row. */
+    header nav {
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    header nav ul {
+      /* Sized to fit all five links on one row at 375px. Wrapping is allowed
+         so a longer label degrades to a second row instead of being clipped
+         off-screen, which is what an overflow-scroll row would do. */
+      gap: 0.5rem 0.75rem;
+      width: 100%;
+      /* Room for the focus ring, which would otherwise be clipped */
+      padding: 3px 0;
+    }
+    header nav li { margin-bottom: 0; white-space: nowrap; }
+    header nav a:not(.nav-logo) { font-size: 0.875rem; }
+    .nav-logo { font-size: 1.125rem; }
   }
 </style>
 
