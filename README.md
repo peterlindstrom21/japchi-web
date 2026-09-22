@@ -53,3 +53,33 @@ Notes:
 - The GitHub Actions workflow in `.github/workflows/deploy.yml` builds on push to `main` and deploys the `dist/` artifact.
 - If you also want `www.jopchi.com`, add a `CNAME` record for `www` pointing to the GitHub Pages host you choose and redirect it to the apex domain.
 
+## Universal links (apple-app-site-association)
+
+`public/.well-known/apple-app-site-association` declares which app may open
+`jopchi.com` links. Its `appIDs` entry is `<TeamID>.<BundleID>` and must match
+the app exactly — currently `37E9ED67YU.online.playjapchi.japchi`, taken from
+`DEVELOPMENT_TEAM` and `PRODUCT_BUNDLE_IDENTIFIER` in the iOS project.
+
+The bundle id keeps the old `japchi` spelling on purpose. It is an immutable
+store key: renaming it would create a new app in App Store Connect and orphan
+the existing TestFlight build and the `japchi_remove_ads` purchase. Match it,
+do not correct it.
+
+Two things this file cannot fix on its own:
+
+1. **The app needs the Associated Domains entitlement.** Until
+   `ios/japchi/japchi.entitlements` declares
+   `com.apple.developer.associated-domains` with `applinks:jopchi.com`, iOS
+   never fetches this file, so universal links do not work no matter how
+   correct it is. Today that file only declares Sign in with Apple.
+
+2. **GitHub Pages serves it as `application/octet-stream`.** Apple documents
+   `application/json`, and Pages offers no way to set a per-file content type
+   (it has no equivalent of a `_headers` file). Fixing it means fronting the
+   site with something that can set headers, or hosting on a platform that
+   can. Verify with:
+
+   ```sh
+   curl -sI https://jopchi.com/.well-known/apple-app-site-association | grep -i content-type
+   ```
+
