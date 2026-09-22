@@ -1,10 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
-const lastUpdated = '2026-07-25';
+import {
+  LEGAL_NAME, LEGAL_STATE, LEGAL_COUNTRY, POSTAL_ADDRESS,
+  CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_E164,
+} from '../data/legal';
+const lastUpdated = '2026-09-21';
 ---
 <Base
   title="Privacy Policy — JopChi"
-  description="JopChi Privacy Policy: how we handle your data with Firebase auth, cloud stats, and no ads."
+  description="JopChi Privacy Policy: Firebase sign-in, cloud-saved stats, opt-in analytics that default to off, and what advertising collects."
 >
   <article aria-labelledby="privacy-heading">
     <!-- Draft notice -->
@@ -35,14 +39,18 @@ const lastUpdated = '2026-07-25';
         <li><a href="#section-data-collected">2. Data We Collect</a></li>
         <li><a href="#section-authentication">3. Authentication (Firebase)</a></li>
         <li><a href="#section-game-stats">4. Cloud-Stored Game Statistics</a></li>
-        <li><a href="#section-no-ads">5. No Advertising</a></li>
-        <li><a href="#section-no-sale">6. No Sale of Personal Data</a></li>
-        <li><a href="#section-third-parties">7. Third-Party Services</a></li>
-        <li><a href="#section-data-retention">8. Data Retention &amp; Deletion</a></li>
-        <li><a href="#section-children">9. Children's Privacy</a></li>
-        <li><a href="#section-rights">10. Your Rights</a></li>
-        <li><a href="#section-changes">11. Changes to This Policy</a></li>
-        <li><a href="#section-contact">12. Contact Us</a></li>
+        <li><a href="#section-analytics">5. Analytics (Opt-In)</a></li>
+        <li><a href="#section-ads">6. Advertising</a></li>
+        <li><a href="#section-no-sale">7. Selling &amp; Sharing of Personal Data</a></li>
+        <li><a href="#section-third-parties">8. Third-Party Services</a></li>
+        <li><a href="#section-data-retention">9. Data Retention &amp; Deletion</a></li>
+        <li><a href="#section-legal-basis">10. Legal Bases for Processing</a></li>
+        <li><a href="#section-transfers">11. International Data Transfers</a></li>
+        <li><a href="#section-children">12. Children's Privacy</a></li>
+        <li><a href="#section-rights">13. Your Rights Under the GDPR</a></li>
+        <li><a href="#section-california">14. California Privacy Rights</a></li>
+        <li><a href="#section-changes">15. Changes to This Policy</a></li>
+        <li><a href="#section-contact">16. Contact Us</a></li>
       </ol>
     </nav>
 
@@ -50,9 +58,33 @@ const lastUpdated = '2026-07-25';
       <h2 id="section-identity">1. Who We Are</h2>
       <div class="card">
         <p>
-          JopChi is an independent iOS application. For privacy inquiries, contact
-          us at <a href="mailto:support@jopchi.com">support@jopchi.com</a>.
+          JopChi is an independent iOS game published by <strong>{LEGAL_NAME}</strong>,
+          an individual based in {LEGAL_STATE}, {LEGAL_COUNTRY}.
         </p>
+        <p>
+          {LEGAL_NAME} is the <strong>data controller</strong> for the personal
+          data described in this policy, and can be reached at:
+        </p>
+        <address class="legal-address">
+          {LEGAL_NAME}<br />
+          {POSTAL_ADDRESS && <Fragment>{POSTAL_ADDRESS}<br /></Fragment>}
+          {CONTACT_PHONE && CONTACT_PHONE_E164 && (
+            <Fragment><a href={`tel:${CONTACT_PHONE_E164}`}>{CONTACT_PHONE}</a><br /></Fragment>
+          )}
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        </address>
+        {(!POSTAL_ADDRESS || !CONTACT_PHONE) && (
+          <p class="needs-input" role="note">
+            <strong>[NEEDS INPUT]</strong> — a postal address and telephone
+            number are still to be added, pending a decision on whether to use
+            a business address and number rather than personal ones. Both are
+            needed before release: GDPR Article 13 requires the controller's
+            contact details, EU consumer rules expect a trader to be reachable
+            other than by email, and Apple verifies and publishes a trader's
+            name, address, phone and email on the EU App Store product page
+            under Digital Services Act Articles 30-31.
+          </p>
+        )}
       </div>
     </section>
 
@@ -65,6 +97,8 @@ const lastUpdated = '2026-07-25';
           <li><strong>Display name / email</strong> — provided by your Apple, Google, or Facebook account at sign-in, used solely to personalise your experience.</li>
           <li><strong>Game statistics</strong> — puzzle attempt counts, scores, streaks, and timestamps, stored in Firebase Firestore.</li>
           <li><strong>Device information</strong> — iOS version and device model, collected by Firebase automatically for crash reporting.</li>
+          <li><strong>Analytics events</strong> — only if you opt in. See section 5.</li>
+          <li><strong>Advertising identifiers</strong> — only where ads are served and you have permitted tracking. See section 6.</li>
         </ul>
         <p>We do <strong>not</strong> collect precise location, contacts, photos, health data, or any other sensitive category.</p>
       </div>
@@ -75,7 +109,8 @@ const lastUpdated = '2026-07-25';
       <div class="card">
         <p>
           JopChi uses <strong>Firebase Authentication</strong> (provided by Google LLC)
-          to manage sign-in. We support three providers:
+          to manage sign-in. You can play as a guest without an account. If you
+          do sign in, we support three providers:
         </p>
         <ul>
           <li>
@@ -92,9 +127,7 @@ const lastUpdated = '2026-07-25';
           </li>
         </ul>
         <p>
-          Firebase Authentication data is processed under Google's <a href="https://firebase.google.com/support/privacy" rel="noopener noreferrer" target="_blank">
-            Firebase Privacy and Security documentation
-          </a>.
+          Firebase Authentication data is processed under Google's <a href="https://firebase.google.com/support/privacy" rel="noopener noreferrer" target="_blank">Firebase Privacy and Security documentation</a>.
         </p>
       </div>
     </section>
@@ -109,51 +142,111 @@ const lastUpdated = '2026-07-25';
           explicitly share a result.
         </p>
         <p>
-          Firebase Firestore is operated by Google LLC and governed by the <a href="https://cloud.google.com/terms/data-processing-addendum" rel="noopener noreferrer" target="_blank">
-            Google Cloud Data Processing Addendum
-          </a>.
+          Firebase Firestore is operated by Google LLC and governed by the <a href="https://cloud.google.com/terms/data-processing-addendum" rel="noopener noreferrer" target="_blank">Google Cloud Data Processing Addendum</a>.
         </p>
       </div>
     </section>
 
-    <section aria-labelledby="section-no-ads">
-      <h2 id="section-no-ads">5. No Advertising</h2>
+    <section aria-labelledby="section-analytics">
+      <h2 id="section-analytics">5. Analytics (Opt-In)</h2>
       <div class="card">
         <p>
-          JopChi contains <strong>no advertisements</strong>. We do not integrate
-          any advertising SDK, affiliate network, or sponsored content. There is
-          no ad-tracking identifier (IDFA) usage.
+          JopChi uses <strong>Firebase Analytics</strong> to understand how the
+          game is played. It is <strong>off by default</strong>: a fresh install
+          collects nothing until you agree, and you can change your mind at any
+          time from Settings.
+        </p>
+        <p>
+          When you have not opted in, collection is disabled in two places. The
+          app issues no analytics calls, and the Firebase SDK's own automatic
+          events — session starts, screen views, app updates — are switched off
+          as well. Opting out means <strong>no analytics events at all</strong>,
+          not merely fewer.
+        </p>
+        <p>When analytics is enabled, we deliberately never send:</p>
+        <ul>
+          <li>Authentication tokens</li>
+          <li>Email addresses, display names, or avatar URLs</li>
+          <li>Any free text you type, including your guesses</li>
+        </ul>
+        <p>
+          Event parameters and user properties are a fixed, limited list. The
+          only identifier attached is your pseudonymous Firebase user ID.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="section-ads">
+      <h2 id="section-ads">6. Advertising</h2>
+      <div class="card">
+        <p>
+          JopChi is free to play and supported by advertising. Ads are served by
+          third-party advertising networks, which act as independent controllers
+          of the data they collect:
+        </p>
+        <ul>
+          <li><strong>Google AdMob</strong> — <a href="https://business.safety.google/privacy/" rel="noopener noreferrer" target="_blank">Google Privacy Policy</a></li>
+          <li><strong>AppLovin MAX</strong> — <a href="https://www.applovin.com/privacy/" rel="noopener noreferrer" target="_blank">AppLovin Privacy Policy</a></li>
+        </ul>
+        <p>
+          These networks may collect device and usage signals in order to
+          deliver and measure ads. On iOS, personalised advertising can involve
+          the <strong>Identifier for Advertisers (IDFA)</strong>, and Apple's <strong>App Tracking Transparency</strong> framework governs access to
+          it: we can only use that identifier if you grant permission when
+          asked. Declining is a fully supported choice that leaves the game
+          identical, and you can change it at any time in <em>iOS Settings &rsaquo; Privacy &amp; Security &rsaquo; Tracking</em>.
+        </p>
+        <p>
+          Where required, an ad network's own consent flow will ask about
+          personalised advertising before any personalised ad is shown.
+          Declining means you still see ads, but non-personalised ones.
+        </p>
+        <p>
+          <strong>Removing ads.</strong> A one-time in-app purchase permanently
+          removes advertising from the app. See our <a href="/terms#section-purchases">Terms of Service</a> for how that purchase works.
         </p>
       </div>
     </section>
 
     <section aria-labelledby="section-no-sale">
-      <h2 id="section-no-sale">6. No Sale of Personal Data</h2>
+      <h2 id="section-no-sale">7. Selling &amp; Sharing of Personal Data</h2>
       <div class="card">
         <p>
-          We do <strong>not</strong> sell, rent, trade, or otherwise transfer your
-          personal data to third parties for their own commercial purposes. We do
-          not share data with data brokers or analytics resellers.
+          We do <strong>not</strong> sell your personal data for money, and we do
+          not share it with data brokers or analytics resellers.
+        </p>
+        <p>
+          You should know that under some privacy laws — notably the California
+          Consumer Privacy Act as amended — the terms &ldquo;sell&rdquo; and
+          &ldquo;share&rdquo; are defined broadly, and serving <strong>personalised
+          advertising</strong> can fall within them even when no money changes
+          hands. If you would rather that did not happen, you have two
+          independent ways to prevent it: decline tracking when Apple asks, or
+          remove advertising entirely with the in-app purchase. Section 14
+          describes your California rights in more detail.
         </p>
       </div>
     </section>
 
     <section aria-labelledby="section-third-parties">
-      <h2 id="section-third-parties">7. Third-Party Services</h2>
+      <h2 id="section-third-parties">8. Third-Party Services</h2>
       <div class="card">
         <p>We use the following third-party services, each with their own privacy policies:</p>
         <ul>
-          <li><strong>Google Firebase</strong> (Authentication, Firestore, Crashlytics) — <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Google Privacy Policy</a></li>
+          <li><strong>Google Firebase</strong> (Authentication, Firestore, Crashlytics, Analytics) — <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Google Privacy Policy</a></li>
+          <li><strong>Google AdMob</strong> — <a href="https://business.safety.google/privacy/" rel="noopener noreferrer" target="_blank">Google Privacy Policy</a></li>
+          <li><strong>AppLovin MAX</strong> — <a href="https://www.applovin.com/privacy/" rel="noopener noreferrer" target="_blank">AppLovin Privacy Policy</a></li>
           <li><strong>Apple Sign In</strong> — <a href="https://www.apple.com/legal/privacy/" rel="noopener noreferrer" target="_blank">Apple Privacy Policy</a></li>
           <li><strong>Google Sign In</strong> — <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Google Privacy Policy</a></li>
           <li><strong>Facebook Login</strong> — <a href="https://www.facebook.com/policy.php" rel="noopener noreferrer" target="_blank">Facebook Data Policy</a></li>
+          <li><strong>Apple App Store</strong> — processes all in-app purchases. We never receive or store your payment details.</li>
         </ul>
-        <p>We do not integrate any other third-party analytics, tracking, or advertising libraries.</p>
+        <p>Beyond those listed above, we integrate no other analytics, tracking, or advertising libraries.</p>
       </div>
     </section>
 
     <section aria-labelledby="section-data-retention">
-      <h2 id="section-data-retention">8. Data Retention &amp; Deletion</h2>
+      <h2 id="section-data-retention">9. Data Retention &amp; Deletion</h2>
       <div class="card">
         <p>
           We retain your account and game statistics for as long as your account
@@ -165,11 +258,57 @@ const lastUpdated = '2026-07-25';
           Crash logs collected by Firebase Crashlytics are automatically purged
           after 90 days per Google's standard retention schedule.
         </p>
+        <p>
+          Data held by the advertising networks in section 6 is retained under
+          their own policies and schedules, not ours. Deleting your JopChi
+          account does not erase records those networks hold independently;
+          their privacy policies explain how to make requests directly to them.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="section-legal-basis">
+      <h2 id="section-legal-basis">10. Legal Bases for Processing</h2>
+      <div class="card">
+        <p>
+          We are established outside the EU, but JopChi is offered to players
+          in the EU, so the GDPR applies to this processing under Article 3(2).
+          We rely on the following legal bases:
+        </p>
+        <ul>
+          <li><strong>Performance of a contract</strong> (Article 6(1)(b)) — creating your account, saving your streak and statistics, and delivering a purchase you have made.</li>
+          <li><strong>Consent</strong> (Article 6(1)(a)) — analytics, and personalised advertising. Both are off until you agree, and both are withdrawable at any time without losing access to the game.</li>
+          <li><strong>Legitimate interests</strong> (Article 6(1)(f)) — crash reporting and keeping the service secure and working. Our interest is in a game that does not crash; the data is limited to device model, OS version, and diagnostics.</li>
+        </ul>
+        <p>
+          Where we rely on consent, withdrawing it is as easy as giving it, and
+          does not affect processing that already took place while consent was
+          in force.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="section-transfers">
+      <h2 id="section-transfers">11. International Data Transfers</h2>
+      <div class="card">
+        <p>
+          We operate from the United States, and our service providers —
+          Google (Firebase), Apple, Meta, and the advertising networks in
+          section 6 — process data on infrastructure that may sit outside the
+          European Economic Area. If you are in the EU or EEA, your data will
+          therefore be transferred out of it.
+        </p>
+        <p>
+          Those transfers rely on the safeguards each provider offers under
+          Chapter V of the GDPR, principally the European Commission's <strong>Standard Contractual Clauses</strong> and, where applicable,
+          the provider's certification under the EU&ndash;US Data Privacy
+          Framework. Google's terms for Firebase are set out in the <a href="https://cloud.google.com/terms/data-processing-addendum" rel="noopener noreferrer" target="_blank">Google Cloud Data Processing Addendum</a>.
+        </p>
       </div>
     </section>
 
     <section aria-labelledby="section-children">
-      <h2 id="section-children">9. Children's Privacy</h2>
+      <h2 id="section-children">12. Children's Privacy</h2>
       <div class="card">
         <p>
           JopChi is not directed to children under the age of 13 (or the
@@ -182,18 +321,72 @@ const lastUpdated = '2026-07-25';
     </section>
 
     <section aria-labelledby="section-rights">
-      <h2 id="section-rights">10. Your Rights</h2>
+      <h2 id="section-rights">13. Your Rights Under the GDPR</h2>
+      <div class="card">
+        <p>You have the right to:</p>
+        <ul>
+          <li><strong>Access</strong> the personal data we hold about you, and receive a copy</li>
+          <li><strong>Rectify</strong> data that is inaccurate or incomplete</li>
+          <li><strong>Erasure</strong> — have your account and its data deleted</li>
+          <li><strong>Restrict</strong> or <strong>object to</strong> certain processing</li>
+          <li><strong>Data portability</strong> — receive your data in a machine-readable form</li>
+          <li><strong>Withdraw consent</strong> at any time, for analytics or personalised ads</li>
+        </ul>
+        <p>
+          To exercise any of these, email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. We respond
+          within one month, as the GDPR requires, and we do not charge for it.
+        </p>
+        <p>
+          Two of them you can exercise yourself, immediately, without contacting
+          us at all: analytics consent is reversible from Settings, and tracking
+          permission is reversible in iOS Settings.
+        </p>
+        <p>
+          If you believe we have handled your data improperly you may lodge a
+          complaint with the data protection authority in your own country. We
+          are not established in the EU, so there is no single lead supervisory
+          authority for us; your national authority is the right place to go,
+          and EU residents can find theirs through the <a href="https://www.edpb.europa.eu/about-edpb/about-edpb/members_en" rel="noopener noreferrer" target="_blank">European Data Protection Board</a>.
+        </p>
+        <p class="needs-input" role="note">
+          <strong>[NEEDS INPUT]</strong> — GDPR Article 27 requires a
+          controller outside the EU that offers services to EU residents to
+          designate a <strong>representative in the Union</strong>, unless the
+          processing is occasional, low-risk and involves no large-scale
+          special-category data. Whether the exemption covers a daily game with
+          advertising is a judgement call for counsel. If a representative is
+          appointed, their name and address must be published here.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="section-california">
+      <h2 id="section-california">14. California Privacy Rights</h2>
       <div class="card">
         <p>
-          Depending on your jurisdiction you may have rights to access, correct,
-          delete, or port your personal data, and to object to or restrict certain
-          processing. To exercise any of these rights, contact us at <a href="mailto:support@jopchi.com">support@jopchi.com</a>.
+          Where the California Consumer Privacy Act as amended applies to us,
+          California residents have the right to know what personal information is
+          collected, to request its deletion or correction, to opt out of its
+          sale or sharing for cross-context behavioural advertising, and not to
+          be discriminated against for exercising any of those rights.
+        </p>
+        <p>
+          To opt out of personalised advertising, decline tracking when Apple
+          asks, or turn it off later in <em>iOS Settings &rsaquo; Privacy &amp; Security &rsaquo; Tracking</em>.
+          Removing ads with the in-app purchase also ends it. The game remains
+          fully playable either way, with identical stats, streaks, and
+          features — we do not offer a worse experience to anyone who opts out.
+        </p>
+        <p>
+          For any other request, email <a href="mailto:support@jopchi.com">support@jopchi.com</a>.
+          We may need to verify that the request genuinely comes from you, and
+          you may use an authorised agent.
         </p>
       </div>
     </section>
 
     <section aria-labelledby="section-changes">
-      <h2 id="section-changes">11. Changes to This Policy</h2>
+      <h2 id="section-changes">15. Changes to This Policy</h2>
       <div class="card">
         <p>
           We may update this Privacy Policy from time to time. When we do, we will
@@ -204,7 +397,7 @@ const lastUpdated = '2026-07-25';
     </section>
 
     <section aria-labelledby="section-contact">
-      <h2 id="section-contact">12. Contact Us</h2>
+      <h2 id="section-contact">16. Contact Us</h2>
       <div class="card">
         <p>
           For any privacy-related questions or requests: <a href="mailto:support@jopchi.com">support@jopchi.com</a>
@@ -257,9 +450,27 @@ const lastUpdated = '2026-07-25';
 
   .toc a {
     font-size: 0.9rem;
+  } 
+
+  section { margin-top: 2.5rem; } 
+  section h2 { margin-bottom: 1rem; }
+
+  .legal-address {
+    font-style: normal;
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--color-border);
+    line-height: 1.7;
   }
 
-  section { margin-top: 2.5rem; }
-  section h2 { margin-bottom: 1rem; }
+  /* An item still awaiting a decision before publication — deliberately loud */
+  .needs-input {
+    margin-top: 1rem;
+    padding: 0.875rem 1rem;
+    border-left: 3px solid #fbbf24;
+    background: rgba(251, 191, 36, 0.1);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9375rem;
+    color: #fde68a;
+  }
 </style>
-
