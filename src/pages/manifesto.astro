@@ -3,71 +3,102 @@ import Base from '../layouts/Base.astro';
 ---
 <Base
   title="Manifesto — JopChi"
-  description="JopChi does not audition for the present. A twice-daily dual-word puzzle that keeps the record without turning that record into a parade."
+  description="JopChi is not built to compete for every moment of your attention. Twice a day a rift opens: two hidden words, seven guesses, one decisive split."
 >
   <article class="manifesto" aria-labelledby="manifesto-heading">
     <p class="section-label">Manifesto</p>
     <h1 id="manifesto-heading">
-      <span class="gradient-text">JopChi does not audition for the present.</span>
+      <span class="gradient-text">The JopChi Manifesto</span>
     </h1>
 
     <div class="manifesto-body">
-      <p>
-        It refuses the arms race of polish, the fattening of every tap into a
-        campaign, the demand that a pastime shout to be counted. Twice a day the
-        rift opens — two hidden words, a narrow window, a single job: find the
-        bond between them and close the tear in as few guesses as the mind will
-        allow. Then the board goes still. You pick it up. You put it down. It
-        keeps the record without turning that record into a parade.
+      <p class="lead">
+        JopChi is not built to compete for every moment of your attention.
       </p>
       <p>
-        Under it runs a score we will not apologize for: the best music ever
-        written for two words and a clock. Not a menu loop begging for gold, not
-        a trailer wearing an orchestra. A composed weather. It arrives when the
-        rift does, and it leaves when you do.
+        Twice a day, a rift opens. Two words are hidden within it. You have
+        seven guesses and one decisive split to reveal them both and close the
+        rift.
+      </p>
+      <p class="beat">Then the board becomes still.</p>
+      <p>
+        There are no endless levels demanding to be completed, no season to keep
+        up with and no pressure to turn a quiet achievement into a public
+        performance. JopChi keeps your record, but leaves you in control of what
+        it means and whether you share it.
       </p>
       <p>
-        The work lives on the pocket screen, patient about sign-in, stubborn
-        about the day&rsquo;s two appointments, and built so the puzzle does not
-        require one kind of body. Sight is welcome. It is not required. Color is
-        a dialect, not a gate. Type grows. Motion can sit down. Contrast can
-        shout. Switch and keyboard walk the same board as a thumb. The cosmos of
-        two words was never meant to be a private club.
+        Beneath every puzzle is an original musical score created to make those
+        few minutes feel distinct. It is not background noise or a soundtrack
+        competing for attention. It is a changing atmosphere&mdash;present
+        enough to give the puzzle character, yet restrained enough to leave room
+        to think. It arrives with the rift and leaves when you do.
+      </p>
+      <p>
+        JopChi lives comfortably on the screen in your pocket. It is patient
+        about signing in, respectful of your time and ready for two brief
+        appointments each day.
+      </p>
+      <p>
+        It is also designed from the beginning for the many different ways
+        people see, hear, move, read and play. Color supports the experience,
+        but never carries essential meaning alone. Text can grow. Motion can be
+        reduced. Contrast can be strengthened. Sound, touch, keyboard and switch
+        controls can offer different paths across the same board.
+      </p>
+      <p>
+        Accessibility is not an extra feature added after the game is finished.
+        It is part of how JopChi is made. Our ambition is to create a word game
+        worthy of recognition for inclusive design&mdash;not because everyone
+        plays in the same way, but because everyone deserves an equally
+        thoughtful way to play.
       </p>
     </div>
 
     <blockquote class="manifesto-pull">
       <p>
-        If modern software is a floodlight, JopChi is a lamp you aim yourself.
+        If modern software often feels like a floodlight, JopChi is a lamp you
+        aim for yourself.
       </p>
     </blockquote>
 
+    <div class="manifesto-coda">
+      <p>It does not ask to own your day.</p>
+      <p>
+        It asks for a few thoughtful minutes&mdash;and makes them count.
+      </p>
+    </div>
+
     <section aria-labelledby="offers-heading">
-      <h2 id="offers-heading">What it offers</h2>
+      <h2 id="offers-heading">What JopChi offers</h2>
       <ul class="offers-list" role="list">
         <li class="card">
-          <strong>Morning Game 1 and Evening Game 2</strong> — two words each,
-          one scheduled challenge, no season to enlist in
+          <strong>Two daily games</strong>&mdash;morning and evening&mdash;with
+          two hidden words in each.
         </li>
         <li class="card">
-          <strong>A ledger of how you showed up</strong>, held back until you
-          choose to look
+          <strong>Seven guesses, one split</strong> and a challenge that rewards
+          insight rather than endless play.
         </li>
         <li class="card">
-          <strong>Sound, switch, and stillness</strong> as first-class paths, not
-          a retrofit
+          <strong>A personal record</strong> that waits quietly until you choose
+          to view it.
         </li>
         <li class="card">
-          <strong>Palettes, type, and contrast</strong> that follow the player
-          instead of scolding them
+          <strong>Accessible ways to play</strong> through sound, touch,
+          keyboard, switch controls and reduced motion.
         </li>
         <li class="card">
-          <strong>A soundtrack</strong> that treats a daily puzzle as if it
-          deserved a cathedral
+          <strong>Adjustable text, contrast and color palettes</strong> that
+          adapt to the player.
         </li>
         <li class="card">
-          <strong>No obligation to broadcast</strong>; the session can end in the
-          room it began
+          <strong>An original soundtrack</strong> designed to make a daily word
+          puzzle feel like a small ritual.
+        </li>
+        <li class="card">
+          <strong>Complete freedom to share your result</strong>&mdash;or let
+          the experience end exactly where it began.
         </li>
       </ul>
     </section>
@@ -98,11 +129,22 @@ import Base from '../layouts/Base.astro';
     text-wrap: pretty;
   }
 
-  /* The opening paragraph continues directly from the h1, so it gets a lead-in
-     weight rather than a drop cap (which would split the word "It"). */
-  .manifesto-body p:first-child {
-    font-size: 1.25rem;
+  /* The opening line states the whole argument — given weight rather than a
+     drop cap, which would split the word it starts with. */
+  .manifesto-body .lead {
+    font-size: 1.3125rem;
     color: var(--color-text);
+    font-weight: 500;
+  }
+
+  /* A one-line paragraph that is meant to land as a pause, not a sentence
+     swallowed into the paragraph above it. */
+  .manifesto-body .beat {
+    font-size: 1.25rem;
+    color: var(--color-accent);
+    font-style: italic;
+    margin: 2rem 0;
+    text-align: center;
   }
 
   .manifesto-pull {
@@ -118,6 +160,25 @@ import Base from '../layouts/Base.astro';
     line-height: 1.35;
     font-weight: 600;
     text-wrap: balance;
+  }
+
+  /* Closing couplet: two short lines that carry the ending */
+  .manifesto-coda {
+    margin: 2.5rem 0 0;
+    text-align: center;
+  }
+
+  .manifesto-coda p {
+    font-size: 1.1875rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    text-wrap: balance;
+  }
+
+  .manifesto-coda p:last-child {
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0;
   }
 
   .manifesto section { margin-top: 3rem; }
@@ -148,13 +209,16 @@ import Base from '../layouts/Base.astro';
     .manifesto h1 { margin-bottom: 1.5rem; }
 
     /* Tighter leading and a smaller lead-in: at this measure the desktop
-       values gave an 11-line opening paragraph. The first-child rule has to
-       be restated here — it out-specifies .manifesto-body on its own. */
+       values gave an overlong opening block. Each size has to be restated
+       here — the class rules out-specify .manifesto-body on their own. */
     .manifesto-body { font-size: 1.0625rem; line-height: 1.6; }
-    .manifesto-body p:first-child { font-size: 1.125rem; }
+    .manifesto-body .lead { font-size: 1.1875rem; }
+    .manifesto-body .beat { font-size: 1.125rem; margin: 1.5rem 0; }
     .manifesto-body p { margin-bottom: 1.25rem; }
 
     .manifesto-pull { margin: 2rem 0; padding: 1.25rem 1.25rem; }
+    .manifesto-coda { margin-top: 2rem; }
+    .manifesto-coda p { font-size: 1.0625rem; }
     .manifesto section { margin-top: 2.25rem; }
     .offers-list li { padding: 1rem 1.125rem; }
     .manifesto-footer-note { margin-top: 2.25rem; }
