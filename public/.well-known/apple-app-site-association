@@ -2,7 +2,7 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["TEAMID_PLACEHOLDER.online.playjopchi"],
+        "appIDs": ["37E9ED67YU.online.playjapchi.japchi"],
         "components": [
           {
             "/": "/*",
@@ -13,7 +13,6 @@
     ]
   },
   "webcredentials": {
-    "apps": ["TEAMID_PLACEHOLDER.online.playjopchi"]
+    "apps": ["37E9ED67YU.online.playjapchi.japchi"]
   }
 }
-
