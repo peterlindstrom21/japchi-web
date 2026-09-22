@@ -1,0 +1,21 @@
+# app-ads.txt — IAB Tech Lab authorised sellers for JopChi
+#
+# Declares which ad systems are allowed to sell JopChi's inventory, so a
+# spoofed bid claiming to be this app can be rejected. Crawlers read only the
+# record lines below; everything starting with "#" is ignored.
+#
+# Must stay reachable at the ROOT of the developer website exactly as that URL
+# is entered in App Store Connect / Google Play:  https://jopchi.com/app-ads.txt
+#
+# Field order per spec: <domain of ad system>, <publisher id>, <relationship>,
+# <certification authority id>
+#
+# AdMob — publisher id matches ADMOB_APP_ID_IOS in the app's
+# src/monetization/config.ts (ca-app-pub-5395179353372072). The trailing id is
+# Google's own certification authority id, identical for every AdMob publisher.
+google.com, pub-5395179353372072, DIRECT, f08c47fec0942fa0
+
+# AppLovin MAX is not listed yet: APPLOVIN_SDK_KEY is still a placeholder in the
+# app, and MAX's own lines have to be copied from the AppLovin dashboard rather
+# than guessed. Add them here when MAX is configured, or its demand will go
+# unauthorised.
