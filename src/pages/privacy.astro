@@ -73,16 +73,18 @@ const lastUpdated = '2026-09-21';
           )}
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
         </address>
+        <!-- TRACKED, do not drop: a postal address and telephone number are
+             still required before public release. GDPR Article 13 requires the
+             controller's contact details; EU consumer rules expect a trader to be
+             reachable other than by email; and Apple verifies and publishes a
+             trader's name, address, phone and email on the EU App Store product
+             page under DSA Articles 30-31. Held back pending a decision on using
+             a business address and number rather than personal ones — see
+             POSTAL_ADDRESS and CONTACT_PHONE in src/data/legal.ts. -->
         {(!POSTAL_ADDRESS || !CONTACT_PHONE) && (
-          <p class="needs-input" role="note">
-            <strong>[NEEDS INPUT]</strong> — a postal address and telephone
-            number are still to be added, pending a decision on whether to use
-            a business address and number rather than personal ones. Both are
-            needed before release: GDPR Article 13 requires the controller's
-            contact details, EU consumer rules expect a trader to be reachable
-            other than by email, and Apple verifies and publishes a trader's
-            name, address, phone and email on the EU App Store product page
-            under Digital Services Act Articles 30-31.
+          <p class="pending-note" role="note">
+            A postal address and telephone number will be published here before
+            the app's public release.
           </p>
         )}
       </div>
@@ -348,14 +350,17 @@ const lastUpdated = '2026-09-21';
           authority for us; your national authority is the right place to go,
           and EU residents can find theirs through the <a href="https://www.edpb.europa.eu/about-edpb/about-edpb/members_en" rel="noopener noreferrer" target="_blank">European Data Protection Board</a>.
         </p>
-        <p class="needs-input" role="note">
-          <strong>[NEEDS INPUT]</strong> — GDPR Article 27 requires a
-          controller outside the EU that offers services to EU residents to
-          designate a <strong>representative in the Union</strong>, unless the
-          processing is occasional, low-risk and involves no large-scale
-          special-category data. Whether the exemption covers a daily game with
-          advertising is a judgement call for counsel. If a representative is
-          appointed, their name and address must be published here.
+        <!-- TRACKED, do not drop: GDPR Article 27 requires a controller outside
+             the EU offering services to EU residents to designate a representative
+             in the Union, unless the processing is occasional, low-risk and involves
+             no large-scale special-category data. Whether that exemption covers a
+             daily game with advertising is a judgement call for counsel. If a
+             representative is appointed, their name and address must be published in
+             the paragraph below. -->
+        <p class="pending-note" role="note">
+          We are reviewing whether we are required to appoint a representative
+          in the European Union under Article 27. If one is appointed, their
+          name and address will be published here.
         </p>
       </div>
     </section>
@@ -463,8 +468,8 @@ const lastUpdated = '2026-09-21';
     line-height: 1.7;
   }
 
-  /* An item still awaiting a decision before publication — deliberately loud */
-  .needs-input {
+  /* A reader-facing note about something not yet published */
+  .pending-note {
     margin-top: 1rem;
     padding: 0.875rem 1rem;
     border-left: 3px solid #fbbf24;
