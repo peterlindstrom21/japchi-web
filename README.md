@@ -73,13 +73,21 @@ Two things this file cannot fix on its own:
    never fetches this file, so universal links do not work no matter how
    correct it is. Today that file only declares Sign in with Apple.
 
-2. **GitHub Pages serves it as `application/octet-stream`.** Apple documents
-   `application/json`, and Pages offers no way to set a per-file content type
-   (it has no equivalent of a `_headers` file). Fixing it means fronting the
-   site with something that can set headers, or hosting on a platform that
-   can. Verify with:
+2. **GitHub Pages serves it as `application/octet-stream`,** not the
+   `application/json` Apple documents, and Pages offers no way to set a
+   per-file content type (no `_headers` equivalent). In practice this has not
+   blocked anything — Apple's CDN fetched and cached the file anyway. Treat it
+   as a known deviation to keep in mind if link handling ever misbehaves, not
+   as something to go and fix.
+
+   The useful check is not our content type but whether Apple actually
+   ingested the file. Apple serves what it cached, so this is the source of
+   truth:
 
    ```sh
-   curl -sI https://jopchi.com/.well-known/apple-app-site-association | grep -i content-type
+   curl -s https://app-site-association.cdn-apple.com/a/v1/jopchi.com
    ```
+
+   A 200 with our JSON means Apple has it. Apple caches for up to 24 hours, so
+   after changing the file expect a delay before that endpoint reflects it.
 
