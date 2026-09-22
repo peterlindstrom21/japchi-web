@@ -1,6 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
-const lastUpdated = '2026-09-19';
+import {
+  LEGAL_NAME, LEGAL_STATE, LEGAL_COUNTRY, GOVERNING_LAW,
+  POSTAL_ADDRESS, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_E164,
+} from '../data/legal';
+const lastUpdated = '2026-09-21';
 ---
 <Base
   title="Terms of Service — JopChi"
@@ -11,8 +15,8 @@ const lastUpdated = '2026-09-19';
     <div class="draft-notice" role="alert" aria-live="polite">
       ⚠️ <strong>DRAFT — Pending Legal Review.</strong> This document has not yet
       been reviewed by legal counsel. Do not treat it as a final, binding
-      agreement. Sections marked <strong>[NEEDS INPUT]</strong> require a decision before publication.
-      Last updated: <time datetime={lastUpdated}>{lastUpdated}</time>.
+      agreement. One item is still marked <strong>[NEEDS INPUT]</strong> and
+      needs filling before publication. Last updated: <time datetime={lastUpdated}>{lastUpdated}</time>.
     </div>
 
     <p class="section-label">Legal</p>
@@ -55,12 +59,30 @@ const lastUpdated = '2026-09-19';
       <h2 id="section-who">1. Who We Are</h2>
       <div class="card">
         <p>
-          JopChi is an independent iOS game. <strong>[NEEDS INPUT]</strong> —
-          the legal entity behind JopChi (individual or company name, and
-          registered address) must be named here before publication. Both app
-          stores and consumer-protection rules in most jurisdictions require an
-          identifiable counterparty.
+          JopChi is an independent iOS game published by <strong>{LEGAL_NAME}</strong>,
+          an individual based in {LEGAL_STATE}, {LEGAL_COUNTRY}. These Terms are
+          an agreement between you and {LEGAL_NAME}.
         </p>
+        <address class="legal-address">
+          {LEGAL_NAME}<br />
+          {POSTAL_ADDRESS && <Fragment>{POSTAL_ADDRESS}<br /></Fragment>}
+          {CONTACT_PHONE && CONTACT_PHONE_E164 && (
+            <Fragment><a href={`tel:${CONTACT_PHONE_E164}`}>{CONTACT_PHONE}</a><br /></Fragment>
+          )}
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        </address>
+        {(!POSTAL_ADDRESS || !CONTACT_PHONE) && (
+          <p class="needs-input" role="note">
+            <strong>[NEEDS INPUT]</strong> — a postal address and telephone
+            number are still to be added, pending a decision on whether to use
+            a business address and number rather than personal ones. Both are
+            needed before release: GDPR Article 13 requires the controller's
+            contact details, EU consumer rules expect a trader to be reachable
+            other than by email, and Apple verifies and publishes a trader's
+            name, address, phone and email on the EU App Store product page
+            under Digital Services Act Articles 30-31.
+          </p>
+        )}
       </div>
     </section>
 
@@ -130,11 +152,9 @@ const lastUpdated = '2026-09-19';
           You can remove advertising permanently through the in-app purchase
           described in section 7.
         </p>
-        <p class="inconsistency-note" role="note">
-          <strong>[NEEDS INPUT]</strong> — this section must be reconciled with
-          the <a href="/privacy#section-no-ads">Privacy Policy</a>, which
-          currently states that JopChi contains no advertisements and integrates
-          no advertising SDK. Both documents cannot be correct at the same time.
+        <p>
+          What those networks collect, and how to refuse personalised
+          advertising without losing access to the game, is described in our <a href="/privacy#section-ads">Privacy Policy</a>.
         </p>
       </div>
     </section>
@@ -150,7 +170,11 @@ const lastUpdated = '2026-09-19';
         </p>
         <p>
           Because Apple handles billing, <strong>refunds are requested from
-          Apple</strong>, not from us, under the App Store's refund policy.
+          Apple</strong>, not from us, under the App Store's refund policy. EU
+          consumers ordinarily have a 14-day right to withdraw from a digital
+          purchase; because this content is delivered in full the moment it is
+          bought, that right may be lost once delivery begins, and Apple's own
+          process is where any such request is made.
           Restoring a previous purchase on a new device is done through the
           app's restore function using the same Apple Account.
         </p>
@@ -204,9 +228,20 @@ const lastUpdated = '2026-09-19';
         <p>
           To the fullest extent permitted by law, we are not liable for
           indirect, incidental, special, or consequential damages, or for lost
-          data, streaks, or statistics. <strong>[NEEDS INPUT]</strong> — any
-          monetary cap on liability should be set by counsel, and must respect
-          the consumer-law floors that apply in your target markets.
+          data, streaks, or statistics.
+        </p>
+        <p>
+          Where liability cannot be excluded, it is limited to the total amount
+          you paid us for the Service in the twelve months before the claim
+          arose. For a player who has never purchased anything that amount is
+          zero; for someone who bought Remove Ads it is the price of that
+          purchase.
+        </p>
+        <p>
+          None of this limits liability that cannot lawfully be limited &mdash;
+          including for death or personal injury caused by negligence, for
+          fraud, or under the mandatory consumer protections described in
+          section 14.
         </p>
       </div>
     </section>
@@ -250,12 +285,19 @@ const lastUpdated = '2026-09-19';
       <h2 id="section-law">14. Governing Law</h2>
       <div class="card">
         <p>
-          <strong>[NEEDS INPUT]</strong> — the governing law and the forum for
-          disputes must be chosen deliberately, and deliberately left unset here
-          rather than guessed. The right answer depends on where the entity in
-          section 1 is established and which markets the app ships to; a choice
-          of law does not override mandatory consumer protections in the
-          player's home jurisdiction.
+          These Terms are governed by the laws of <strong>{GOVERNING_LAW}</strong>,
+          without regard to its conflict-of-laws rules, and the state and
+          federal courts located in California have jurisdiction over any
+          dispute.
+        </p>
+        <p>
+          That choice does not take away rights you already have. JopChi is
+          offered in the EU and EEA, and if you are a consumer resident there
+          the <strong>mandatory consumer protections of your own country still
+          apply</strong> in full — a choice of California law cannot displace
+          them. You may bring proceedings in the courts where you live, and you
+          may raise a complaint with a consumer dispute body in your own country
+          first. Nothing in these Terms asks you to give that up.
         </p>
       </div>
     </section>
@@ -326,13 +368,21 @@ const lastUpdated = '2026-09-19';
     gap: 0.2rem 1rem;
   }
 
-  .toc a { font-size: 0.9rem; }
+  .toc a { font-size: 0.9rem; } 
 
-  section { margin-top: 2.5rem; }
+  section { margin-top: 2.5rem; } 
   section h2 { margin-bottom: 1rem; }
 
-  /* Flags a conflict with another published document — deliberately loud */
-  .inconsistency-note {
+  .legal-address {
+    font-style: normal;
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--color-border);
+    line-height: 1.7;
+  }
+
+  /* An item still awaiting a decision before publication — deliberately loud */
+  .needs-input {
     margin-top: 1rem;
     padding: 0.875rem 1rem;
     border-left: 3px solid #fbbf24;
@@ -341,5 +391,5 @@ const lastUpdated = '2026-09-19';
     font-size: 0.9375rem;
     color: #fde68a;
   }
-  .inconsistency-note a { color: #fde68a; }
+  .needs-input a { color: #fde68a; }
 </style>
