@@ -10,17 +10,14 @@ import Base from '../layouts/Base.astro';
 
     <p class="section-label">Two games every day</p>
     <h1 id="hero-heading">
-      <span class="gradient-text">Bridge the Rift.</span><br />
-      Two scheduled games, two words each, infinite challenge.
+      <span class="gradient-text">Two words. One rift.</span><br />
+      Seven guesses and one decisive split.
     </h1>
 
     <p class="hero-sub">
-      JopChi is a twice-daily dual-word puzzle game for iOS. Morning Game 1
-      runs from <strong>12:00 AM – 11:59 AM PT</strong>, and Evening Game 2
-      runs from <strong>12:00 PM – 11:59 PM PT</strong>. In each game you
-      receive two mystery words separated by a cosmic <strong>rift</strong>;
-      your mission is to discover the hidden connection and close the rift in
-      as few guesses as possible.
+      JopChi <span class="pronounce">(&ldquo;YOP-Chee&rdquo;)</span> is a
+      twice-daily dual-word puzzle for iOS. Every game hides <strong>two five-letter words</strong> at once, and every guess is scored
+      against both of them together. Morning Game 1 runs <strong>12:00 AM – 11:59 AM PT</strong>; Evening Game 2 runs <strong>12:00 PM – 11:59 PM PT</strong>.
     </p>
 
     <div class="cta-group" role="group" aria-label="Download options">
@@ -66,29 +63,76 @@ import Base from '../layouts/Base.astro';
        ============================================================ -->
   <section class="how-section" aria-labelledby="how-heading">
     <h2 id="how-heading">How the Rift Works</h2>
-    <div class="rift-demo" aria-label="Rift mechanic illustration">
-      <div class="rift-word" aria-label="Starting word">BREAD</div>
-      <div class="rift-gap" aria-label="The rift — the hidden connection">
-        <span class="rift-line" aria-hidden="true"></span>
-        <span class="rift-icon" aria-hidden="true">⟡</span>
-        <span class="rift-line" aria-hidden="true"></span>
+
+    <p class="how-intro">
+      Two hidden words differ in <strong>exactly three letters</strong>. That
+      difference is the <em>rift</em>. The other two letters are already shared,
+      in the same correct positions &mdash; so every board begins with common
+      ground and a gap to close.
+    </p>
+
+    <figure class="rift-demo">
+      <figcaption class="rift-caption" aria-hidden="true">
+        An example pair. Positions 1 and 5 are shared; positions 2, 3 and 4 are
+        the rift.
+      </figcaption>
+      <!-- The tiles carry the shared/rift distinction in border style, which a
+           screen reader cannot perceive, so the diagram is presentational and
+           the equivalent information is given in prose below it. -->
+      <div class="rift-rows" aria-hidden="true">
+        <div class="rift-row">
+          <span class="rift-label">Word A</span>
+          <span class="tile shared">C</span>
+          <span class="tile differs">R</span>
+          <span class="tile differs">A</span>
+          <span class="tile differs">N</span>
+          <span class="tile shared">E</span>
+        </div>
+        <div class="rift-row">
+          <span class="rift-label">Word B</span>
+          <span class="tile shared">C</span>
+          <span class="tile differs">L</span>
+          <span class="tile differs">O</span>
+          <span class="tile differs">S</span>
+          <span class="tile shared">E</span>
+        </div>
       </div>
-      <div class="rift-word" aria-label="Ending word">AMEND</div>
-    </div>
+      <p class="rift-legend" aria-hidden="true">
+        <span class="key"><span class="swatch shared"></span> Shared letter</span>
+        <span class="key"><span class="swatch differs"></span> Inside the rift</span>
+      </p>
+      <p class="sr-only">
+        In this example Word A is CRANE and Word B is CLOSE. Both start with C
+        and end with E, so those two letters are already shared and correctly
+        placed. The middle three letters differ &mdash; R, A, N against L, O, S
+        &mdash; and that is the rift you have to close.
+      </p>
+    </figure>
 
     <div class="rift-explanation card">
+      <h3>Before the split</h3>
       <p>
-        JopChi runs two games each day in US Pacific time: Morning Game 1 from
-        12:00 AM to 11:59 AM PT, and Evening Game 2 from 12:00 PM to 11:59 PM
-        PT. In each round, two words appear on opposite sides of the <em>rift</em> — a conceptual gap that only one hidden bridge word can
-        close.
+        You guess a five-letter word and it is scored against both hidden words
+        at once, on a single grid. A letter can be confirmed in one word, the
+        other, or both &mdash; and when it is merely present rather than placed,
+        the board deliberately will not tell you <em>which</em> word it belongs
+        to. That ambiguity is the puzzle.
       </p>
+
+      <h3>The split</h3>
       <p>
-        You guess candidate bridge words one at a time; the game scores each
-        guess by how semantically close it sits to both target words, pulling the
-        rift walls together with every correct attempt. When the rift fully
-        closes, the puzzle is solved — but your score depends on how efficiently
-        you bridged it.
+        After at least two guesses you may spend a turn on the <strong>Split</strong>: an irreversible move that breaks the board into
+        two separate grids, one per word. From then on each guess is scored
+        against each word independently. Split too early and you have little to
+        go on; leave it too late and you run out of turns. Reach turn 6 without
+        splitting and it fires automatically.
+      </p>
+
+      <h3>Winning</h3>
+      <p>
+        Eight turns, and the Split spends one of them &mdash; so seven guesses.
+        You win by getting <strong>both</strong> words, and you must Split at
+        some point to do it.
       </p>
     </div>
   </section>
@@ -102,7 +146,7 @@ import Base from '../layouts/Base.astro';
       <li class="card feature-card">
         <span class="feature-icon" aria-hidden="true">🌌</span>
         <h3>Daily challenge</h3>
-        <p>Two fresh rift every day at midnight and noon, shared by every player worldwide.</p>
+        <p>Two fresh rifts every day at midnight and noon, the same pair for every player worldwide.</p>
       </li>
       <li class="card feature-card">
         <span class="feature-icon" aria-hidden="true">♾️</span>
@@ -112,12 +156,12 @@ import Base from '../layouts/Base.astro';
       <li class="card feature-card">
         <span class="feature-icon" aria-hidden="true">♿</span>
         <h3>Accessible by design</h3>
-        <p>Built with VoiceOver, Dynamic Type, and colorblind-friendly modes from day one.</p>
+        <p>Geometry mode carries every tile state in shape and position, so colour is never the only signal. Six validated palettes, plus a High Contrast mode. <a href="/accessibility">What is and is not built yet</a>.</p>
       </li>
       <li class="card feature-card">
         <span class="feature-icon" aria-hidden="true">🔒</span>
         <h3>Privacy first</h3>
-        <p>Prefer fewer distractions? A small in-app purchase clears ads while we keep your game stats secure and never sell your analytics data.</p>
+        <p>No data brokers, no analytics resellers, and your stats are never sold. Play as a guest, or sign in only to sync your streak across devices.</p>
       </li>
     </ul>
   </section>
@@ -169,54 +213,119 @@ import Base from '../layouts/Base.astro';
 
   .how-section { margin: 4rem 0; }
 
+  .how-intro {
+    max-width: 44rem;
+    font-size: 1.0625rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
   .rift-demo {
-    display: flex;
+    margin: 0 0 2.5rem;
+    /* Narrow screens scroll the diagram rather than the page */
+    overflow-x: auto;
+  }
+
+  .rift-caption {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    max-width: 40rem;
+  }
+
+  .rift-rows {
+    display: inline-grid;
+    gap: 0.5rem;
+  }
+
+  .rift-row {
+    display: grid;
+    grid-template-columns: auto repeat(5, 3rem);
+    gap: 0.5rem;
     align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    margin: 2rem 0 2.5rem;
-    flex-wrap: wrap;
   }
 
-  .rift-word {
-    font-size: clamp(1.75rem, 4vw, 2.75rem);
+  .rift-label {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    padding-right: 0.5rem;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* Shape and border weight distinguish the two states, not hue alone —
+     the same discipline Geometry mode uses in the app. */
+  .tile {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.375rem;
     font-weight: 800;
-    letter-spacing: 0.15em;
-    color: var(--color-accent);
+    border-radius: var(--radius-sm);
     background: var(--color-bg-card);
-    border: 2px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 0.6rem 1.25rem;
   }
 
-  .rift-gap {
+  .tile.shared {
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .tile.differs {
+    border: 2px dashed var(--color-text-muted);
+    color: var(--color-text);
+  }
+
+  .rift-legend {
     display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .rift-legend .key {
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    flex: 1;
-    max-width: 180px;
-    min-width: 80px;
   }
 
-  .rift-line {
-    flex: 1;
-    height: 2px;
-    background: linear-gradient(90deg, var(--color-purple-mid), var(--color-accent));
+  .swatch {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 3px;
+    background: var(--color-bg-card);
+    flex-shrink: 0;
   }
 
-  .rift-icon {
-    font-size: 1.5rem;
+  .swatch.shared { border: 2px solid var(--color-accent); }
+  .swatch.differs { border: 2px dashed var(--color-text-muted); }
+
+  .rift-explanation h3 {
     color: var(--color-accent);
-    animation: pulse-rift 2s ease-in-out infinite;
+    margin-top: 1.5rem;
   }
 
-  @keyframes pulse-rift {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.5; transform: scale(0.85); }
+  .rift-explanation h3:first-child { margin-top: 0; }
+
+  /* Visually hidden, still announced */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .rift-icon { animation: none; }
+  .pronounce {
+    font-size: 0.9em;
+    color: var(--color-text-muted);
+    white-space: nowrap;
   }
 
   .rift-explanation p { color: var(--color-text-muted); }
