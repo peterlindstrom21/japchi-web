@@ -15,8 +15,7 @@ const lastUpdated = '2026-09-21';
     <div class="draft-notice" role="alert" aria-live="polite">
       ⚠️ <strong>DRAFT — Pending Legal Review.</strong> This document has not yet
       been reviewed by legal counsel. Do not treat it as a final, binding
-      agreement. One item is still marked <strong>[NEEDS INPUT]</strong> and
-      needs filling before publication. Last updated: <time datetime={lastUpdated}>{lastUpdated}</time>.
+      agreement. Last updated: <time datetime={lastUpdated}>{lastUpdated}</time>.
     </div>
 
     <p class="section-label">Legal</p>
@@ -71,16 +70,18 @@ const lastUpdated = '2026-09-21';
           )}
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
         </address>
+        <!-- TRACKED, do not drop: a postal address and telephone number are
+             still required before public release. GDPR Article 13 requires the
+             controller's contact details; EU consumer rules expect a trader to be
+             reachable other than by email; and Apple verifies and publishes a
+             trader's name, address, phone and email on the EU App Store product
+             page under DSA Articles 30-31. Held back pending a decision on using
+             a business address and number rather than personal ones — see
+             POSTAL_ADDRESS and CONTACT_PHONE in src/data/legal.ts. -->
         {(!POSTAL_ADDRESS || !CONTACT_PHONE) && (
-          <p class="needs-input" role="note">
-            <strong>[NEEDS INPUT]</strong> — a postal address and telephone
-            number are still to be added, pending a decision on whether to use
-            a business address and number rather than personal ones. Both are
-            needed before release: GDPR Article 13 requires the controller's
-            contact details, EU consumer rules expect a trader to be reachable
-            other than by email, and Apple verifies and publishes a trader's
-            name, address, phone and email on the EU App Store product page
-            under Digital Services Act Articles 30-31.
+          <p class="pending-note" role="note">
+            A postal address and telephone number will be published here before
+            the app's public release.
           </p>
         )}
       </div>
@@ -381,8 +382,8 @@ const lastUpdated = '2026-09-21';
     line-height: 1.7;
   }
 
-  /* An item still awaiting a decision before publication — deliberately loud */
-  .needs-input {
+  /* A reader-facing note about something not yet published */
+  .pending-note {
     margin-top: 1rem;
     padding: 0.875rem 1rem;
     border-left: 3px solid #fbbf24;
@@ -391,5 +392,5 @@ const lastUpdated = '2026-09-21';
     font-size: 0.9375rem;
     color: #fde68a;
   }
-  .needs-input a { color: #fde68a; }
+  .pending-note a { color: #fde68a; }
 </style>
