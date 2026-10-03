@@ -1,5 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
+import { CONTACT_EMAIL } from '../data/legal';
+
+// The beta is invite-only, so the button opens an email asking for access.
+// TestFlight sends the invite to an address, hence the question in the body.
+const betaRequestHref =
+  `mailto:${CONTACT_EMAIL}` +
+  `?subject=${encodeURIComponent('JopChi beta test access')}` +
+  `&body=${encodeURIComponent(
+    'Hi,\n\nI would like to join the JopChi beta on TestFlight.\n\n' +
+      'Email address for the TestFlight invite: \n\nThanks!',
+  )}`;
 ---
 <Base title="JopChi — Daily Dual-Word Puzzle for iOS">
   <!-- ============================================================
@@ -35,13 +46,11 @@ import Base from '../layouts/Base.astro';
         Download on the App Store
       </a>
 
-      <!-- TestFlight beta link placeholder — replace href with real TestFlight invite URL before launch -->
       <a
-        href="https://testflight.apple.com"
+        href={betaRequestHref}
         class="badge-cta badge-cta-secondary"
-        aria-label="Join the JopChi beta on TestFlight (link coming soon)"
+        aria-label="Join the JopChi beta on TestFlight: email us to ask for access"
         aria-describedby="testflight-note"
-        rel="noopener noreferrer"
       >
         <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 2a10 10 0 1 1 0 20A10 10 0 0 1 12 2zm1 5h-2v6l5.25 3.15.75-1.23-4-2.42V7z"/>
@@ -54,7 +63,7 @@ import Base from '../layouts/Base.astro';
       App Store link coming soon — currently in TestFlight beta.
     </p>
     <p id="testflight-note" class="badge-note" role="note">
-      TestFlight invite link will be added before public launch.
+      Beta access is by invite: the button opens an email to {CONTACT_EMAIL}, and we&rsquo;ll send you a TestFlight invite.
     </p>
   </section>
 
