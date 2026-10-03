@@ -85,30 +85,33 @@ const betaRequestHref =
         An example pair. Positions 1 and 5 are shared; positions 2, 3 and 4 are
         the rift.
       </figcaption>
-      <!-- The tiles carry the shared/rift distinction in border style, which a
-           screen reader cannot perceive, so the diagram is presentational and
-           the equivalent information is given in prose below it. -->
+      <!-- Drawn as the game draws a solved board: shared letters split
+           diagonally between both word colours, rift letters in their own
+           word's colour. A screen reader cannot perceive any of that, so the
+           diagram is presentational and the same information is in prose
+           below it. -->
       <div class="rift-rows" aria-hidden="true">
         <div class="rift-row">
-          <span class="rift-label">Word A</span>
+          <span class="rift-label word-a">Word A</span>
           <span class="tile shared">C</span>
-          <span class="tile differs">R</span>
-          <span class="tile differs">A</span>
-          <span class="tile differs">N</span>
+          <span class="tile word-a">R</span>
+          <span class="tile word-a">A</span>
+          <span class="tile word-a">N</span>
           <span class="tile shared">E</span>
         </div>
         <div class="rift-row">
-          <span class="rift-label">Word B</span>
+          <span class="rift-label word-b">Word B</span>
           <span class="tile shared">C</span>
-          <span class="tile differs">L</span>
-          <span class="tile differs">O</span>
-          <span class="tile differs">S</span>
+          <span class="tile word-b">L</span>
+          <span class="tile word-b">O</span>
+          <span class="tile word-b">S</span>
           <span class="tile shared">E</span>
         </div>
       </div>
       <p class="rift-legend" aria-hidden="true">
         <span class="key"><span class="swatch shared"></span> Shared letter</span>
-        <span class="key"><span class="swatch differs"></span> Inside the rift</span>
+        <span class="key"><span class="swatch word-a"></span> Word A&rsquo;s rift letter</span>
+        <span class="key"><span class="swatch word-b"></span> Word B&rsquo;s rift letter</span>
       </p>
       <p class="sr-only">
         In this example Word A is CRANE and Word B is CLOSE. Both start with C
@@ -230,6 +233,18 @@ const betaRequestHref =
   }
 
   .rift-demo {
+    /* The game's Classic tile colours (palette.ts in the app). */
+    --tile-word-a: #3b82f6;
+    --tile-word-b: #a855f7;
+    --tile-shared-border: #7c3aed;
+    --tile-letter: #f5f3ff;
+    /* Same hard diagonal as the game's shared tile: Word B top right,
+       Word A bottom left. */
+    --tile-shared-fill: linear-gradient(
+      to bottom left,
+      var(--tile-word-b) 50%,
+      var(--tile-word-a) 50%
+    );
     margin: 0 0 2.5rem;
     /* Narrow screens scroll the diagram rather than the page */
     overflow-x: auto;
@@ -249,7 +264,9 @@ const betaRequestHref =
 
   .rift-row {
     display: grid;
-    grid-template-columns: auto repeat(5, 3rem);
+    /* Tiles give up a little size on the narrowest phones rather than push
+       the last one off the edge. */
+    grid-template-columns: auto repeat(5, minmax(2.25rem, 3rem));
     gap: 0.5rem;
     align-items: center;
   }
@@ -265,27 +282,35 @@ const betaRequestHref =
     white-space: nowrap;
   }
 
-  /* Shape and border weight distinguish the two states, not hue alone —
-     the same discipline Geometry mode uses in the app. */
+  .rift-label.word-a { color: var(--tile-word-a); }
+  .rift-label.word-b { color: var(--tile-word-b); }
+
+  /* As in the game, the shared state is not told by hue alone: it is the
+     only tile split across two colours. */
   .tile {
     display: grid;
     place-items: center;
-    width: 3rem;
-    height: 3rem;
+    aspect-ratio: 1;
     font-size: 1.375rem;
     font-weight: 800;
-    border-radius: var(--radius-sm);
-    background: var(--color-bg-card);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    color: var(--tile-letter);
   }
 
   .tile.shared {
-    border: 2px solid var(--color-accent);
-    color: var(--color-accent);
+    background: var(--tile-shared-fill);
+    border-color: var(--tile-shared-border);
   }
 
-  .tile.differs {
-    border: 2px dashed var(--color-text-muted);
-    color: var(--color-text);
+  .tile.word-a {
+    background: var(--tile-word-a);
+    border-color: var(--tile-word-a);
+  }
+
+  .tile.word-b {
+    background: var(--tile-word-b);
+    border-color: var(--tile-word-b);
   }
 
   .rift-legend {
@@ -311,8 +336,12 @@ const betaRequestHref =
     flex-shrink: 0;
   }
 
-  .swatch.shared { border: 2px solid var(--color-accent); }
-  .swatch.differs { border: 2px dashed var(--color-text-muted); }
+  .swatch.shared {
+    background: var(--tile-shared-fill);
+    border: 2px solid var(--tile-shared-border);
+  }
+  .swatch.word-a { background: var(--tile-word-a); }
+  .swatch.word-b { background: var(--tile-word-b); }
 
   .rift-explanation h3 {
     color: var(--color-accent);
