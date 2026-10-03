@@ -7,13 +7,27 @@
  * occurrence is a contradiction between them.
  */
 
-/** The controller / counterparty named in both documents. */
-export const LEGAL_NAME = 'Peter Lindstrom';
+/**
+ * The people who publish JopChi: the counterparty in the Terms and the
+ * (joint) data controllers in the Privacy Policy. Every name here is printed
+ * in both documents, and the wording follows the count — "an individual" /
+ * "individuals", "the data controller" / "joint data controllers".
+ */
+export const LEGAL_NAMES: readonly string[] = ['Peter Lindstrom', 'Julian Hughes'];
+
+/** The names as one phrase: "Peter Lindstrom and Julian Hughes". */
+export const LEGAL_NAME =
+  LEGAL_NAMES.length <= 1
+    ? (LEGAL_NAMES[0] ?? '')
+    : `${LEGAL_NAMES.slice(0, -1).join(', ')} and ${LEGAL_NAMES[LEGAL_NAMES.length - 1]}`;
+
+/** More than one person: switches the documents' wording to the plural. */
+export const LEGAL_PLURAL = LEGAL_NAMES.length > 1;
 
 /**
  * How the party is described.
  *
- * 'individual' — a natural person, with no registered business. Neither
+ * 'individual' — natural persons, with no registered business. Neither
  * document may describe a company or a sole-trader firm, because neither
  * exists; naming a legal form that has not been registered would be a false
  * statement in the one document whose purpose is to identify the

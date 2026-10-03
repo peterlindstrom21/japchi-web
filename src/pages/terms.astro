@@ -1,10 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import {
-  LEGAL_NAME, LEGAL_STATE, LEGAL_COUNTRY, GOVERNING_LAW,
+  LEGAL_NAME, LEGAL_NAMES, LEGAL_PLURAL, LEGAL_STATE, LEGAL_COUNTRY, GOVERNING_LAW,
   POSTAL_ADDRESS, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_E164,
 } from '../data/legal';
-const lastUpdated = '2026-09-21';
+const lastUpdated = '2026-10-03';
 ---
 <Base
   title="Terms of Service — JopChi"
@@ -58,12 +58,12 @@ const lastUpdated = '2026-09-21';
       <h2 id="section-who">1. Who We Are</h2>
       <div class="card">
         <p>
-          JopChi is an independent iOS game published by <strong>{LEGAL_NAME}</strong>,
-          an individual based in {LEGAL_STATE}, {LEGAL_COUNTRY}. These Terms are
-          an agreement between you and {LEGAL_NAME}.
+          JopChi is an independent iOS game published by <strong>{LEGAL_NAME}</strong>,{' '}
+          {LEGAL_PLURAL ? 'individuals' : 'an individual'} based in {LEGAL_STATE}, {LEGAL_COUNTRY}.
+          These Terms are an agreement between you and {LEGAL_NAME}{LEGAL_PLURAL ? ' (together, “we” or “us”)' : ''}.
         </p>
         <address class="legal-address">
-          {LEGAL_NAME}<br />
+          {LEGAL_NAMES.map(name => <Fragment>{name}<br /></Fragment>)}
           {POSTAL_ADDRESS && <Fragment>{POSTAL_ADDRESS}<br /></Fragment>}
           {CONTACT_PHONE && CONTACT_PHONE_E164 && (
             <Fragment><a href={`tel:${CONTACT_PHONE_E164}`}>{CONTACT_PHONE}</a><br /></Fragment>
