@@ -71,13 +71,13 @@ const lastUpdated = '2026-09-21';
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
         </address>
         <!-- TRACKED, do not drop: a postal address and telephone number are
-             still required before public release. GDPR Article 13 requires the
+             required. GDPR Article 13 requires the
              controller's contact details; EU consumer rules expect a trader to be
              reachable other than by email; and Apple verifies and publishes a
              trader's name, address, phone and email on the EU App Store product
-             page under DSA Articles 30-31. Held back pending a decision on using
-             a business address and number rather than personal ones — see
-             POSTAL_ADDRESS and CONTACT_PHONE in src/data/legal.ts. -->
+             page under DSA Articles 30-31. Both are set in src/data/legal.ts
+             (POSTAL_ADDRESS, CONTACT_PHONE); the note below only shows if
+             either is ever emptied. -->
         {(!POSTAL_ADDRESS || !CONTACT_PHONE) && (
           <p class="pending-note" role="note">
             A postal address and telephone number will be published here before
