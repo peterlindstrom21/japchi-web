@@ -44,20 +44,14 @@ export const LEGAL_COUNTRY = 'United States';
 export const GOVERNING_LAW = 'the State of California, United States';
 
 /**
- * WITHHELD PENDING A DECISION — do not put the real address here.
+ * The public business address. Shown on the Privacy Policy, the Terms of
+ * Service and the Support page.
  *
- * This repository is public, so anything committed to this file is published
- * the moment it is pushed, regardless of what the pages render. The operator's
- * home address is not going in here while the question of using a home
- * address versus a separate correspondence address is still open.
- *
- * When it is settled: set this to the address that should be public, and keep
- * it identical to the trader address in App Store Connect. Apple verifies and
- * publishes that one on the EU App Store product page under Digital Services
- * Act Articles 30-31 either way, so the decision is which address is public,
- * not whether one is.
+ * Keep it identical to the trader address in App Store Connect: Apple verifies
+ * and publishes that one on the EU App Store product page under Digital
+ * Services Act Articles 30-31, and the two must not disagree.
  */
-export const POSTAL_ADDRESS = '';
+export const POSTAL_ADDRESS = '100 S Murphy Ave Suite 200, Sunnyvale, CA 94086';
 
 /**
  * No registered company or enskild firma, so there is no organisation number
@@ -69,16 +63,13 @@ export const REGISTRATION_NUMBER = '';
 export const CONTACT_EMAIL = 'support@jopchi.com';
 
 /**
- * WITHHELD PENDING A DECISION — see POSTAL_ADDRESS above for why this file is
- * the wrong place for a personal number while the repository is public.
- *
- * When settled, set both: CONTACT_PHONE is the display form, and
+ * The public business phone number. CONTACT_PHONE is the display form;
  * CONTACT_PHONE_E164 is the same number with no spaces or punctuation,
  * because a tel: URI containing spaces silently fails to dial on some
- * platforms.
+ * platforms. Keep both identical to the trader phone in App Store Connect.
  */
-export const CONTACT_PHONE = '';
-export const CONTACT_PHONE_E164 = '';
+export const CONTACT_PHONE = '+1 (408) 594-8211';
+export const CONTACT_PHONE_E164 = '+14085948211';
 
 /**
  * Whether the operator is established inside the EU/EEA.
