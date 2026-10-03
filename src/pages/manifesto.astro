@@ -69,6 +69,8 @@ import Base from '../layouts/Base.astro';
       </p>
     </div>
 
+    <p class="manifesto-byline">Made by Peter Lindstrom and Julian Hughes</p>
+
     <section aria-labelledby="offers-heading">
       <h2 id="offers-heading">What JopChi offers</h2>
       <ul class="offers-list" role="list">
@@ -181,6 +183,15 @@ import Base from '../layouts/Base.astro';
     margin-bottom: 0;
   }
 
+  /* The manifesto's signature: quiet, centred under the closing couplet. */
+  .manifesto-byline {
+    margin: 1.75rem 0 0;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    letter-spacing: 0.01em;
+  }
+
   .manifesto section { margin-top: 3rem; }
 
   .offers-list {
@@ -219,6 +230,7 @@ import Base from '../layouts/Base.astro';
     .manifesto-pull { margin: 2rem 0; padding: 1.25rem 1.25rem; }
     .manifesto-coda { margin-top: 2rem; }
     .manifesto-coda p { font-size: 1.0625rem; }
+    .manifesto-byline { margin-top: 1.5rem; }
     .manifesto section { margin-top: 2.25rem; }
     .offers-list li { padding: 1rem 1.125rem; }
     .manifesto-footer-note { margin-top: 2.25rem; }
