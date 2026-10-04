@@ -107,17 +107,34 @@ const betaRequestHref =
           <span class="tile word-b">S</span>
           <span class="tile shared">E</span>
         </div>
+        <!-- A guess scored against both words, chosen to need only the
+             colours above plus grey: CRUST against CRANE / CLOSE. -->
+        <p class="guess-caption">A guess, scored against both words:</p>
+        <div class="rift-row">
+          <span class="rift-label">Guess</span>
+          <span class="tile shared">C</span>
+          <span class="tile word-a">R</span>
+          <span class="tile absent">U</span>
+          <span class="tile word-b">S</span>
+          <span class="tile absent">T</span>
+        </div>
       </div>
       <p class="rift-legend" aria-hidden="true">
         <span class="key"><span class="swatch shared"></span> Shared letter</span>
         <span class="key"><span class="swatch word-a"></span> Word A&rsquo;s rift letter</span>
         <span class="key"><span class="swatch word-b"></span> Word B&rsquo;s rift letter</span>
+        <span class="key"><span class="swatch absent"></span> Not part of either word</span>
       </p>
       <p class="sr-only">
         In this example Word A is CRANE and Word B is CLOSE. Both start with C
         and end with E, so those two letters are already shared and correctly
         placed. The middle three letters differ &mdash; R, A, N against L, O, S
         &mdash; and that is the rift you have to close.
+      </p>
+      <p class="sr-only">
+        An example guess, CRUST, scored against both words: C is in the right
+        spot in both words; R is in the right spot in Word A; S is in the right
+        spot in Word B; U and T are grey: they are not part of either word.
       </p>
     </figure>
 
@@ -237,6 +254,7 @@ const betaRequestHref =
     --tile-word-a: #3b82f6;
     --tile-word-b: #a855f7;
     --tile-shared-border: #7c3aed;
+    --tile-absent: #3a3a4a;
     --tile-letter: #f5f3ff;
     /* Same hard diagonal as the game's shared tile: Word B top right,
        Word A bottom left. */
@@ -313,6 +331,17 @@ const betaRequestHref =
     border-color: var(--tile-word-b);
   }
 
+  .tile.absent {
+    background: var(--tile-absent);
+    border-color: var(--tile-absent);
+  }
+
+  .guess-caption {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin: 0.75rem 0 0;
+  }
+
   .rift-legend {
     display: flex;
     flex-wrap: wrap;
@@ -342,6 +371,7 @@ const betaRequestHref =
   }
   .swatch.word-a { background: var(--tile-word-a); }
   .swatch.word-b { background: var(--tile-word-b); }
+  .swatch.absent { background: var(--tile-absent); }
 
   .rift-explanation h3 {
     color: var(--color-accent);
