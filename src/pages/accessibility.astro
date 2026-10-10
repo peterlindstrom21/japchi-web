@@ -1,9 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+
+// Hidden for now: the list is out of date (Stereo Rift audio, haptics, larger
+// text and the hardware keyboard have shipped since). Rewrite it before
+// turning this back on.
+const SHOW_IN_PROGRESS = false;
 ---
 <Base
   title="Accessibility — JopChi"
-  description="How JopChi makes a two-word puzzle playable without relying on colour: Geometry mode, validated palettes, and an honest account of what is not built yet."
+  description="How JopChi makes a two-word puzzle playable without relying on colour: Geometry mode, validated palettes, and colour palettes for every kind of colour vision."
 >
   <article aria-labelledby="a11y-heading">
     <p class="section-label">Inclusive design</p>
@@ -234,6 +239,7 @@ import Base from '../layouts/Base.astro';
       </div>
     </section>
 
+    {SHOW_IN_PROGRESS && (
     <section aria-labelledby="progress-heading">
       <h2 id="progress-heading">Still in progress</h2>
       <div class="card content-card in-progress">
@@ -266,6 +272,7 @@ import Base from '../layouts/Base.astro';
         </ul>
       </div>
     </section>
+    )}
 
     <section aria-labelledby="feedback-heading">
       <h2 id="feedback-heading">Feedback</h2>
