@@ -65,6 +65,25 @@ const betaRequestHref =
     <p id="testflight-note" class="badge-note" role="note">
       Beta access is by invite: the button opens an email to {CONTACT_EMAIL}, and we&rsquo;ll send you a TestFlight invite.
     </p>
+
+    <!-- Launch poster. Says "Launching soon": take it down, or swap it, once
+         JopChi is live on the App Store. -->
+    <figure class="launch-poster">
+      <picture>
+        <source
+          type="image/webp"
+          srcset="/images/jopchi-poster-560.webp 560w, /images/jopchi-poster-1122.webp 1122w"
+          sizes="(max-width: 600px) 100vw, 28rem"
+        />
+        <img
+          src="/images/jopchi-poster-560.jpg"
+          width="560"
+          height="700"
+          decoding="async"
+          alt="JopChi, launching soon. Two words, one split. The words PLANT and BLEND float over a canyon at dawn, split by a bolt of lightning. Two puzzles every day."
+        />
+      </picture>
+    </figure>
   </section>
 
   <!-- ============================================================
@@ -238,6 +257,22 @@ const betaRequestHref =
     font-size: 0.8125rem;
     color: var(--color-text-muted);
     margin-bottom: 0.25rem;
+  }
+
+  .launch-poster {
+    margin: 3rem auto 0;
+    max-width: 28rem;
+  }
+
+  .launch-poster img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg, 1rem);
+    border: 1px solid var(--color-border);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.45),
+      0 0 80px rgba(124, 58, 237, 0.25);
   }
 
   .how-section { margin: 4rem 0; }
