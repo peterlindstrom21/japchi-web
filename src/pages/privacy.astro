@@ -4,7 +4,7 @@ import {
   LEGAL_NAME, LEGAL_STATE, LEGAL_COUNTRY, POSTAL_ADDRESS,
   CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_E164,
 } from '../data/legal';
-const lastUpdated = '2026-10-03';
+const lastUpdated = '2026-10-10';
 ---
 <Base
   title="Privacy Policy — JopChi"
@@ -93,7 +93,7 @@ const lastUpdated = '2026-10-03';
           <li><strong>Game statistics</strong> — puzzle attempt counts, scores, streaks, and timestamps, stored in Firebase Firestore.</li>
           <li><strong>Device information</strong> — iOS version and device model, collected by Firebase automatically for crash reporting.</li>
           <li><strong>Analytics events</strong> — only if you opt in. See section 5.</li>
-          <li><strong>Advertising identifiers</strong> — only where ads are served and you have permitted tracking. See section 6.</li>
+          <li><strong>Advertising data</strong> — device and usage signals the ad network uses to serve and measure non-personalised ads, unless you have removed ads. See section 6.</li>
         </ul>
         <p>We do <strong>not</strong> collect precise location, contacts, photos, health data, or any other sensitive category.</p>
       </div>
@@ -180,17 +180,22 @@ const lastUpdated = '2026-10-03';
           <li><strong>AppLovin MAX</strong> — <a href="https://www.applovin.com/privacy/" rel="noopener noreferrer" target="_blank">AppLovin Privacy Policy</a></li>
         </ul>
         <p>
-          These networks may collect device and usage signals in order to
-          deliver and measure ads. On iOS, personalised advertising can involve
-          the <strong>Identifier for Advertisers (IDFA)</strong>, and Apple's <strong>App Tracking Transparency</strong> framework governs access to
-          it: we can only use that identifier if you grant permission when
-          asked. Declining is a fully supported choice that leaves the game
-          identical, and you can change it at any time in <em>iOS Settings &rsaquo; Privacy &amp; Security &rsaquo; Tracking</em>.
+          JopChi asks only for <strong>non-personalised ads</strong>: ads that
+          are not chosen from a profile of you. It does not track you across
+          other companies' apps and websites, and never asks for Apple's
+          <strong>App Tracking Transparency</strong> permission or reads your
+          device's advertising identifier (IDFA) for that purpose. The ad
+          network still collects device and usage signals in order to deliver
+          and measure ads, to limit how often you see the same ad, and to
+          prevent fraud.
         </p>
         <p>
-          Where required, an ad network's own consent flow will ask about
-          personalised advertising before any personalised ad is shown.
-          Declining means you still see ads, but non-personalised ones.
+          <strong>Players in the EEA, the UK and Switzerland.</strong> Before any
+          ad is requested, JopChi shows Google's consent message, which explains
+          how Google and its partners use data for advertising and lets you
+          choose. No ad is requested until you have answered. Whatever you
+          choose, the game is the same, and you can change your choice at any
+          time in <em>Settings &rsaquo; Privacy choices</em> in the app.
         </p>
         <p>
           <strong>Removing ads.</strong> A one-time in-app purchase permanently
@@ -211,8 +216,7 @@ const lastUpdated = '2026-10-03';
           Consumer Privacy Act as amended — the terms &ldquo;sell&rdquo; and
           &ldquo;share&rdquo; are defined broadly, and serving <strong>personalised
           advertising</strong> can fall within them even when no money changes
-          hands. If you would rather that did not happen, you have two
-          independent ways to prevent it: decline tracking when Apple asks, or
+          hands. JopChi requests non-personalised ads only, and you can also
           remove advertising entirely with the in-app purchase. Section 14
           describes your California rights in more detail.
         </p>
@@ -267,7 +271,7 @@ const lastUpdated = '2026-10-03';
         </p>
         <ul>
           <li><strong>Performance of a contract</strong> (Article 6(1)(b)) — creating your account, saving your streak and statistics, and delivering a purchase you have made.</li>
-          <li><strong>Consent</strong> (Article 6(1)(a)) — analytics, and personalised advertising. Both are off until you agree, and both are withdrawable at any time without losing access to the game.</li>
+          <li><strong>Consent</strong> (Article 6(1)(a)) — analytics, and advertising (through Google's consent message, see section 6). Neither applies until you have chosen, and both are withdrawable at any time without losing access to the game.</li>
           <li><strong>Legitimate interests</strong> (Article 6(1)(f)) — crash reporting and keeping the service secure and working. Our interest is in a game that does not crash; the data is limited to device model, OS version, and diagnostics.</li>
         </ul>
         <p>
@@ -320,7 +324,7 @@ const lastUpdated = '2026-10-03';
           <li><strong>Erasure</strong> — have your account and its data deleted</li>
           <li><strong>Restrict</strong> or <strong>object to</strong> certain processing</li>
           <li><strong>Data portability</strong> — receive your data in a machine-readable form</li>
-          <li><strong>Withdraw consent</strong> at any time, for analytics or personalised ads</li>
+          <li><strong>Withdraw consent</strong> at any time, for analytics or advertising</li>
         </ul>
         <p>
           To exercise any of these, email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. We respond
@@ -328,8 +332,8 @@ const lastUpdated = '2026-10-03';
         </p>
         <p>
           Two of them you can exercise yourself, immediately, without contacting
-          us at all: analytics consent is reversible from Settings, and tracking
-          permission is reversible in iOS Settings.
+          us at all: analytics consent is reversible from Settings, and your
+          advertising choice from <em>Settings &rsaquo; Privacy choices</em>.
         </p>
         <p>
           If you believe we have handled your data improperly you may lodge a
@@ -337,18 +341,6 @@ const lastUpdated = '2026-10-03';
           are not established in the EU, so there is no single lead supervisory
           authority for us; your national authority is the right place to go,
           and EU residents can find theirs through the <a href="https://www.edpb.europa.eu/about-edpb/about-edpb/members_en" rel="noopener noreferrer" target="_blank">European Data Protection Board</a>.
-        </p>
-        <!-- TRACKED, do not drop: GDPR Article 27 requires a controller outside
-             the EU offering services to EU residents to designate a representative
-             in the Union, unless the processing is occasional, low-risk and involves
-             no large-scale special-category data. Whether that exemption covers a
-             daily game with advertising is a judgement call for counsel. If a
-             representative is appointed, their name and address must be published in
-             the paragraph below. -->
-        <p class="pending-note" role="note">
-          We are reviewing whether we are required to appoint a representative
-          in the European Union under Article 27. If one is appointed, their
-          name and address will be published here.
         </p>
       </div>
     </section>
@@ -364,9 +356,9 @@ const lastUpdated = '2026-10-03';
           be discriminated against for exercising any of those rights.
         </p>
         <p>
-          To opt out of personalised advertising, decline tracking when Apple
-          asks, or turn it off later in <em>iOS Settings &rsaquo; Privacy &amp; Security &rsaquo; Tracking</em>.
-          Removing ads with the in-app purchase also ends it. The game remains
+          JopChi does not show personalised advertising: it requests
+          non-personalised ads only, and removing ads with the in-app purchase
+          ends advertising altogether. The game remains
           fully playable either way, with identical stats, streaks, and
           features — we do not offer a worse experience to anyone who opts out.
         </p>
