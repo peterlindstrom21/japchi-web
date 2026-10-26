@@ -32,12 +32,10 @@ const betaRequestHref =
     </p>
 
     <div class="cta-group" role="group" aria-label="Download options">
-      <!-- App Store badge placeholder — replace href with real App Store URL before launch -->
       <a
-        href="https://apps.apple.com"
+        href="https://apps.apple.com/us/app/jopchi/id6794706306"
         class="badge-cta app-store-badge"
-        aria-label="Download JopChi on the App Store (link coming soon)"
-        aria-describedby="app-store-note"
+        aria-label="Download JopChi on the App Store"
         rel="noopener noreferrer"
       >
         <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -59,31 +57,9 @@ const betaRequestHref =
       </a>
     </div>
 
-    <p id="app-store-note" class="badge-note" role="note">
-      App Store link coming soon — currently in TestFlight beta.
-    </p>
     <p id="testflight-note" class="badge-note" role="note">
       Beta access is by invite: the button opens an email to {CONTACT_EMAIL}, and we&rsquo;ll send you a TestFlight invite.
     </p>
-
-    <!-- Launch poster. Says "Launching soon": take it down, or swap it, once
-         JopChi is live on the App Store. -->
-    <figure class="launch-poster">
-      <picture>
-        <source
-          type="image/webp"
-          srcset="/images/jopchi-poster-560.webp 560w, /images/jopchi-poster-1122.webp 1122w"
-          sizes="(max-width: 600px) 100vw, 28rem"
-        />
-        <img
-          src="/images/jopchi-poster-560.jpg"
-          width="560"
-          height="560"
-          decoding="async"
-          alt="JopChi, launching soon. The words PLANT and BLEND float over a canyon at dawn, split by a bolt of lightning. Eight guesses, including one split. Two puzzles every day."
-        />
-      </picture>
-    </figure>
   </section>
 
   <!-- ============================================================
@@ -257,22 +233,6 @@ const betaRequestHref =
     font-size: 0.8125rem;
     color: var(--color-text-muted);
     margin-bottom: 0.25rem;
-  }
-
-  .launch-poster {
-    margin: 3rem auto 0;
-    max-width: 28rem;
-  }
-
-  .launch-poster img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-lg, 1rem);
-    border: 1px solid var(--color-border);
-    box-shadow:
-      0 24px 60px rgba(0, 0, 0, 0.45),
-      0 0 80px rgba(124, 58, 237, 0.25);
   }
 
   .how-section { margin: 4rem 0; }
