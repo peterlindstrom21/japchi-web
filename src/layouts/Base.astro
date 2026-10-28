@@ -34,7 +34,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <header role="banner">
       <nav aria-label="Site navigation">
         <a href="/" class="nav-logo" aria-label="JopChi home">
-          <span aria-hidden="true">✦</span> JopChi
+          <picture>
+            <source
+              type="image/webp"
+              srcset="/images/jopchi-logo-64.webp 2x, /images/jopchi-logo-96.webp 3x"
+            />
+            <img
+              src="/images/jopchi-logo-64.png"
+              srcset="/images/jopchi-logo-64.png 2x, /images/jopchi-logo-96.png 3x"
+              width="102"
+              height="32"
+              alt=""
+            />
+          </picture>
         </a>
         <ul role="list">
           <li><a href="/">Home</a></li>
@@ -226,15 +238,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     flex-wrap: wrap;
   }
 
+  /* The wordmark from the iOS app (toplogo.png), shown at 32px tall. */
   .nav-logo {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: var(--color-accent);
-    text-decoration: none;
-    letter-spacing: -0.02em;
+    display: block;
     flex-shrink: 0;
+    line-height: 0;
   }
-  .nav-logo:hover { color: var(--color-accent-hover); }
+  .nav-logo img {
+    display: block;
+    width: auto;
+    height: 32px;
+    transition: opacity 0.15s;
+  }
+  .nav-logo:hover img { opacity: 0.85; }
 
   header nav ul {
     list-style: none;
@@ -378,7 +394,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     }
     header nav li { margin-bottom: 0; white-space: nowrap; }
     header nav a:not(.nav-logo) { font-size: 0.875rem; }
-    .nav-logo { font-size: 1.125rem; }
+    .nav-logo img { height: 28px; }
   }
 </style>
 
