@@ -6,16 +6,6 @@ export interface Props {
 
 const { title, description = 'JopChi — the twice-daily dual-word puzzle game for iOS. Play Morning Game 1 from 12:00 AM–11:59 AM PT and Evening Game 2 from 12:00 PM–11:59 PM PT.' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
-const organization = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'JopChi',
-  url: Astro.site?.href,
-  employee: [
-    { '@type': 'Person', name: 'Flor O’Sullivan', jobTitle: 'COO' },
-  ],
-};
 ---
 <!doctype html>
 <html lang="en">
@@ -33,9 +23,6 @@ const organization = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="JopChi" />
-
-    <!-- Structured data -->
-    <script type="application/ld+json" set:html={JSON.stringify(organization)} />
 
     <!-- Favicon placeholder -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
