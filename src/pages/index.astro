@@ -44,6 +44,14 @@ const betaRequestHref =
         Download on the App Store
       </a>
 
+      <!-- Not a link yet: swap for a Google Play <a> once the Android app is out. -->
+      <span class="badge-cta android-badge">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 0 0-.83.22l-1.88 3.24a11.43 11.43 0 0 0-8.94 0L5.65 5.67a.643.643 0 0 0-.87-.2c-.28.18-.37.54-.22.83L6.4 9.48A10.81 10.81 0 0 0 1 18h22a10.81 10.81 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/>
+        </svg>
+        Android coming soon
+      </span>
+
       <a
         href={betaRequestHref}
         class="badge-cta badge-cta-secondary"
@@ -227,6 +235,19 @@ const betaRequestHref =
   .app-store-badge {
     background: linear-gradient(135deg, #1a0533, var(--color-purple-mid));
     border: 2px solid var(--color-accent);
+  }
+
+  /* Muted and static so it doesn't read as a button you can press. */
+  .android-badge {
+    background: transparent;
+    border: 2px dashed var(--color-border);
+    color: var(--color-text-muted);
+    cursor: default;
+  }
+  .android-badge:hover {
+    filter: none;
+    transform: none;
+    color: var(--color-text-muted);
   }
 
   .badge-note {
